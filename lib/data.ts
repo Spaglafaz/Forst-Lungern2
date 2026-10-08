@@ -150,8 +150,8 @@ export const MACHINES: Machine[] = [
   { id: 'hsm', name: 'Forstschlepper HSM 805', kind: 'Rücken und Transport', use: 'Rückt Rundholz von der Strasse zum Polter und auf den Lagerplatz.', image: 'forwarder-holzlager.jpg', pos: 'center' },
   { id: 'liebherr', name: 'Bagger Liebherr 916', kind: 'Wegbau und Verbau', use: 'Für Waldstrassen, Treppen, Bach- und Hangverbauungen.', image: 'wegbau-treppe-bagger.jpg', pos: 'center' },
   { id: 'unitrac', name: 'Lindner Unitrac 82', kind: 'Transporter', use: 'Transport von Material und Personal, Winterdienst.', placeholder: 'Foto Lindner Unitrac 82' },
-  { id: 'mbtrac', name: 'MB Trac', kind: 'Zugmaschine', use: 'Für Anhänger, Seilwinde und Winterdienst.', placeholder: 'Foto MB Trac' },
-  { id: 'kramer', name: 'Kramer', kind: 'Radlader', use: 'Holzumschlag und Arbeiten im Werkhof Hackern.', placeholder: 'Foto Kramer' },
+  { id: 'mbtrac', name: 'MB Trac', kind: 'Zugmaschine', use: 'Für Anhänger, Seilwinde und Winterdienst.', image: 'maschine-mbtrac.jpg', pos: 'center 30%' },
+  { id: 'kramer', name: 'Kramer', kind: 'Radlader', use: 'Holzumschlag und Arbeiten im Werkhof Hackern.', image: 'maschine-kramer.jpg', pos: 'center 15%' },
 ];
 
 export const MILESTONES = [
