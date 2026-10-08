@@ -6,7 +6,7 @@ import { PolaroidStack } from '@/components/ds/PolaroidStack';
 import { PhotoCard } from '@/components/ds/PhotoCard';
 import { ZoomImage } from '@/components/ds/ZoomImage';
 import { IconBadge } from '@/components/ds/IconBadge';
-import { CONTACT, PH, SERVICES } from '@/lib/data';
+import { CONTACT, JOBS, PH, SERVICES } from '@/lib/data';
 import { asset } from '@/lib/base';
 
 export default function HomePage() {
@@ -58,6 +58,26 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Offene Stelle */}
+      {JOBS.length > 0 && (
+        <section className="job-teaser">
+          <div className="container job-teaser__inner" data-reveal="fade">
+            <div>
+              <span className="job__eyebrow">
+                <span className="job__pulse" aria-hidden />
+                Wir suchen Verstärkung
+              </span>
+              <p className="job-teaser__title">
+                {JOBS[0].title} {JOBS[0].pensum}
+              </p>
+            </div>
+            <Button variant="onDark" arrow href="/jobs#stelle">
+              Zur Stelle
+            </Button>
+          </div>
+        </section>
+      )}
 
       {/* Kennzahlen */}
       <section className="stats">

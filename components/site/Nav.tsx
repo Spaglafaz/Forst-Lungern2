@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
-import { NAV, CONTACT } from '@/lib/data';
+import { NAV, CONTACT, JOBS } from '@/lib/data';
 import { TLink } from '../motion/TLink';
 import { useSite } from '../motion/MotionShell';
 import { Button } from '../ds/Button';
@@ -86,6 +86,7 @@ export function Nav() {
             {NAV.map((n) => (
               <TLink key={n.href} href={n.href} className={'nav__link' + (isActive(pathname, n.href) ? ' is-active' : '')}>
                 {n.label}
+                {n.href === '/jobs' && JOBS.length > 0 && <span className="nav__dot" aria-label="offene Stelle" />}
               </TLink>
             ))}
             <span className="nav__indicator" ref={indicatorRef} style={{ opacity: 0 }} />
@@ -158,6 +159,7 @@ function MobileMenu() {
           <TLink key={n.href} href={n.href} className="menu__link" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>
             <span className="menu__link-num">{String(i + 1).padStart(2, '0')}</span>
             <span className="menu__link-text">{n.label}</span>
+            {n.href === '/jobs' && JOBS.length > 0 && <span className="nav__dot" aria-label="offene Stelle" />}
             <span className="menu__link-rule" />
           </TLink>
         ))}

@@ -1533,3 +1533,162 @@ html.has-motion .curtain--intro .curtain__logo {
   color: var(--text-strong);
   font-variant-numeric: tabular-nums;
 }
+
+/* ===== Stelleninserat ===== */
+.job {
+  position: relative;
+  background: var(--surface-dark);
+  color: #fff;
+  padding: clamp(64px, 9vw, 112px) 0;
+  overflow: hidden;
+}
+.job::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--texture-contour);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.job .container {
+  position: relative;
+}
+.job__head {
+  max-width: 760px;
+}
+.job__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: 500 12px/1 var(--font-ui);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pine-300);
+}
+.job__pulse {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pine-300);
+}
+.job__pulse::after,
+.nav__dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: inherit;
+  animation: fl-pulse 2s var(--ease-out) infinite;
+}
+@keyframes fl-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+.job__title {
+  margin: 16px 0 0;
+  font: var(--type-h2);
+  font-size: clamp(30px, 4vw, 44px);
+  text-transform: uppercase;
+  color: #fff;
+  text-wrap: balance;
+}
+.job__intro {
+  margin: 24px 0 0;
+  font: 400 19px/1.55 var(--font-serif);
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 62ch;
+}
+.job a {
+  color: #fff;
+}
+.job a:hover {
+  color: var(--pine-300);
+}
+.job__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 28px 48px;
+  margin-top: 56px;
+}
+.job__list-title {
+  margin: 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  font: 500 20px/1.2 var(--font-display);
+  text-transform: uppercase;
+  color: #fff;
+}
+.job__list {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.job__list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font: 400 17px/1.45 var(--font-serif);
+  color: rgba(255, 255, 255, 0.92);
+}
+.job__cta {
+  margin-top: 56px;
+  padding: clamp(24px, 4vw, 36px);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.job__cta-title {
+  margin: 0;
+  font: 700 20px/1.3 var(--font-serif);
+  color: #fff;
+}
+
+/* Hinweis-Band auf der Startseite */
+.job-teaser {
+  background: var(--pine-700);
+  color: #fff;
+  padding: 28px 0;
+}
+.job-teaser__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px 32px;
+  flex-wrap: wrap;
+}
+.job-teaser__title {
+  margin: 8px 0 0;
+  font: 500 clamp(20px, 2.4vw, 26px)/1.15 var(--font-display);
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* Pulsierender Punkt in der Navigation (offene Stelle) */
+.nav__dot {
+  position: absolute;
+  top: 2px;
+  right: -10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--pine-300);
+}
+.menu__link .nav__dot {
+  position: relative;
+  top: -0.6em;
+  right: 0;
+  margin-left: -8px;
+}

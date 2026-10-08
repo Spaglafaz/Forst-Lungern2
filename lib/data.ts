@@ -163,6 +163,61 @@ export const MILESTONES = [
   { date: '1. März 2026', text: 'Offizieller Betriebsstart der Forst Lungern AG.' },
 ];
 
+export type Job = {
+  id: string;
+  title: string;
+  pensum: string;
+  start: string;
+  /** Veröffentlicht am (für Google-Jobsuche) */
+  datePosted: string;
+  intro: string;
+  aufgaben: string[];
+  profil: string[];
+  angebot: string[];
+  kontakt: { name: string; rolle: string; tel: string; telLabel: string; mail: string };
+};
+
+/** Offene Stellen. Leere Liste = Hinweis «Zurzeit keine Stellen ausgeschrieben». */
+export const JOBS: Job[] = [
+  {
+    id: 'forstwart-allrounder',
+    title: 'Forstwart/in EFZ oder Allrounder/in',
+    pensum: '80–100 %',
+    start: 'Per sofort oder nach Vereinbarung',
+    datePosted: '2026-10-08',
+    intro:
+      'Die Forst Lungern AG sucht zur Verstärkung ihres Teams per sofort oder nach Vereinbarung eine/n Forstwart/in EFZ oder Allrounder/in.',
+    aufgaben: [
+      'Allgemeine forstliche Tätigkeiten',
+      'Mitarbeit bei Hang- und Bachverbauungen',
+      'Unterhalt von Wald-, Alp- und Erschliessungsstrassen',
+      'Sicherheits- und Spezialholzereien',
+      'Bedienen und Warten von Maschinen und Geräten',
+      'Mitarbeit bei weiteren vielseitigen Arbeiten unseres Forstbetriebs',
+    ],
+    profil: [
+      'Abgeschlossene Ausbildung als Forstwart/in EFZ von Vorteil',
+      'Selbständige, zuverlässige und teamorientierte Arbeitsweise',
+      'Freude an der Arbeit in der Natur und im alpinen Gelände',
+      'Führerausweis Kategorie B (BE von Vorteil)',
+    ],
+    angebot: [
+      'Eine abwechslungsreiche und verantwortungsvolle Tätigkeit',
+      'Ein motiviertes und kollegiales Team',
+      'Einen vielseitigen Maschinenpark',
+      'Möglichkeiten zur Aus- und Weiterbildung',
+      '5 Wochen Ferien',
+    ],
+    kontakt: {
+      name: 'Armin Imfeld',
+      rolle: 'Geschäftsführer',
+      tel: 'tel:+41798330036',
+      telLabel: '079 833 00 36',
+      mail: 'armin.imfeld@forst-lungern.ch',
+    },
+  },
+];
+
 export const LEHRE = [
   { n: '01', title: 'Schnuppern', text: 'Zwei bis drei Tage mit dem Team im Wald. Du siehst, wie ein Arbeitstag im Forst aussieht.' },
   { n: '02', title: 'Bewerben', text: 'Bewerbung mit Lebenslauf und Zeugnissen an Armin Imfeld. Wir laden dich zum Gespräch ein.' },

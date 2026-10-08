@@ -4,7 +4,8 @@ import { Button } from '@/components/ds/Button';
 import { SectionHeading } from '@/components/ds/SectionHeading';
 import { PolaroidStack } from '@/components/ds/PolaroidStack';
 import { ZoomImage } from '@/components/ds/ZoomImage';
-import { CONTACT, HEROES, LEHRE, PH } from '@/lib/data';
+import { JobPosting } from '@/components/site/JobPosting';
+import { CONTACT, HEROES, JOBS, LEHRE, PH } from '@/lib/data';
 
 export const metadata: Metadata = { title: 'Jobs & Lehrstellen', description: HEROES.jobs.text };
 
@@ -17,19 +18,39 @@ export default function JobsPage() {
       <section className="section">
         <div className="container split">
           <div data-reveal="">
-            <SectionHeading title="Offene Stellen" subtitle="Initiativbewerbungen willkommen" />
-            <p className="body-copy">
-              Zurzeit sind keine Stellen ausgeschrieben. Forstwarte und Maschinisten, die gerne im steilen Gelände arbeiten, dürfen sich jederzeit melden –
-              wir freuen uns über Ihre Bewerbung.
-            </p>
-            <div className="btn-row" style={{ marginTop: 34, gap: 12 }}>
-              <Button icon="mail" href={CONTACT.mail + '?subject=Initiativbewerbung'}>
-                Bewerbung senden
-              </Button>
-              <Button variant="outline" icon="phone" href={CONTACT.tel}>
-                Anrufen
-              </Button>
-            </div>
+            {JOBS.length > 0 ? (
+              <>
+                <SectionHeading title="Offene Stellen" subtitle="Wir suchen Verstärkung für unser Team" />
+                <p className="body-copy">
+                  {JOBS.length === 1 ? 'Aktuell ist eine Stelle offen: ' : 'Aktuell sind folgende Stellen offen: '}
+                  {JOBS.map((j) => j.title + ' ' + j.pensum).join(', ')}. Initiativbewerbungen für andere Funktionen sind ebenfalls willkommen.
+                </p>
+                <div className="btn-row" style={{ marginTop: 34, gap: 12 }}>
+                  <Button arrow href="/jobs#stelle">
+                    Zum Inserat
+                  </Button>
+                  <Button variant="outline" icon="phone" href={CONTACT.tel}>
+                    Anrufen
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <>
+                <SectionHeading title="Offene Stellen" subtitle="Initiativbewerbungen willkommen" />
+                <p className="body-copy">
+                  Zurzeit sind keine Stellen ausgeschrieben. Forstwarte und Maschinisten, die gerne im steilen Gelände arbeiten, dürfen sich jederzeit melden –
+                  wir freuen uns über Ihre Bewerbung.
+                </p>
+                <div className="btn-row" style={{ marginTop: 34, gap: 12 }}>
+                  <Button icon="mail" href={CONTACT.mail + '?subject=Initiativbewerbung'}>
+                    Bewerbung senden
+                  </Button>
+                  <Button variant="outline" icon="phone" href={CONTACT.tel}>
+                    Anrufen
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
           <div data-reveal="right" style={{ display: 'flex', justifyContent: 'center', minWidth: 0, padding: '12px 0' }}>
             <PolaroidStack
@@ -41,6 +62,10 @@ export default function JobsPage() {
           </div>
         </div>
       </section>
+
+      {JOBS.map((job) => (
+        <JobPosting key={job.id} job={job} />
+      ))}
 
       <section className="section section--sand">
         <div className="container">
