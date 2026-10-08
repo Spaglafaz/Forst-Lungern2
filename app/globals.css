@@ -1868,3 +1868,182 @@ html.has-motion .curtain--intro .curtain__logo {
   right: 0;
   margin-left: -8px;
 }
+
+/* ===== 404: Borkenkäfer-Seite ===== */
+.nf {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--nav-h) + var(--space-8)) 0 var(--space-9);
+  background: radial-gradient(ellipse at 75% 40%, var(--forest-800) 0%, transparent 60%), var(--surface-dark);
+  color: var(--text-on-dark);
+}
+.nf__eyebrow {
+  margin: 0 0 18px;
+  font: 500 12px/1 var(--font-ui);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--signal-500);
+}
+.nf__title {
+  margin: 0;
+  font: var(--type-h1);
+  font-size: clamp(36px, 5vw, 56px);
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: var(--text-on-dark);
+}
+.nf__text {
+  max-width: 520px;
+  margin: 24px 0 0;
+  font: 400 19px/1.55 var(--font-serif);
+  color: var(--text-on-dark-muted);
+}
+.nf__actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 36px;
+}
+.nf__healthy {
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+.nf__healthy p {
+  margin: 0 0 12px;
+  font: var(--type-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--pine-300);
+}
+.nf__healthy ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nf__healthy a {
+  font: 400 17px/1.4 var(--font-serif);
+  color: var(--text-on-dark);
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.3);
+  text-underline-offset: 4px;
+  transition: text-decoration-color var(--dur-base) var(--ease-out);
+}
+.nf__healthy a:hover {
+  text-decoration-color: var(--pine-300);
+}
+.nf__polaroid {
+  margin: 0;
+  max-width: 480px;
+  justify-self: center;
+  transform: rotate(2deg);
+  border-bottom-width: 0;
+  animation: nf-drop 0.9s var(--ease-out) both;
+}
+.nf__polaroid figcaption {
+  padding: 14px 6px 16px;
+  font: 400 15px/1.45 var(--font-serif);
+  color: var(--bark-700);
+}
+.nf__polaroid figcaption strong {
+  display: block;
+  margin-bottom: 4px;
+  font: 500 13px/1.2 var(--font-ui);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--timber-700);
+}
+/* Rinde abgezogen: helles Splintholz mit Fasern, dunkle Borke am Rand */
+.nf__wood {
+  padding: 22px 18px;
+  background:
+    linear-gradient(90deg, var(--bark-800) 0 10px, var(--timber-700) 10px 16px, transparent 16px calc(100% - 16px), var(--timber-700) calc(100% - 16px) calc(100% - 10px), var(--bark-800) calc(100% - 10px)),
+    repeating-linear-gradient(90deg, transparent 0 7px, color-mix(in srgb, var(--timber-500) 22%, transparent) 7px 8px, transparent 8px 19px),
+    linear-gradient(180deg, var(--timber-300), color-mix(in srgb, var(--timber-300) 80%, var(--timber-500)));
+}
+.beetle-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.beetle-art__mother path {
+  fill: none;
+  stroke: var(--timber-700);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  animation: nf-draw 0.9s var(--ease-in-out) both;
+}
+.beetle-art__larvae path {
+  fill: none;
+  stroke: color-mix(in srgb, var(--timber-700) 75%, transparent);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  animation: nf-draw 0.6s var(--ease-out) both;
+}
+.beetle-art__larvae ellipse {
+  fill: var(--timber-700);
+  animation: nf-fade 0.3s ease-out both;
+  animation-delay: inherit;
+}
+.beetle-art__bug {
+  fill: var(--bark-900);
+}
+.beetle-art__bug-body {
+  animation:
+    nf-fade 0.4s ease-out 3.4s both,
+    nf-dig 1.6s ease-in-out 3.8s infinite;
+}
+.beetle-art__legs path,
+.beetle-art__antennae {
+  fill: none;
+  stroke: var(--bark-900);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+.beetle-art__legs {
+  animation: nf-legs 0.25s steps(2) 3.8s infinite;
+}
+@keyframes nf-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes nf-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes nf-dig {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  30% {
+    transform: translateY(1.5px) rotate(-6deg);
+  }
+  60% {
+    transform: translateY(0.5px) rotate(6deg);
+  }
+}
+@keyframes nf-legs {
+  to {
+    transform: scaleY(-1);
+  }
+}
+@keyframes nf-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-40px) rotate(-6deg);
+  }
+}
