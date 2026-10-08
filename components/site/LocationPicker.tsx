@@ -3,7 +3,6 @@
 import 'leaflet/dist/leaflet.css';
 import { useEffect, useRef, useState } from 'react';
 import type { Map as LMap, Marker, TileLayer } from 'leaflet';
-import { Button } from '../ds/Button';
 
 /** Karten von swisstopo (frei nutzbar mit Quellenangabe), im Web-Mercator-Raster */
 const TILES = {
@@ -17,12 +16,8 @@ export type LatLng = { lat: number; lng: number };
 
 export const fmtPos = (p: LatLng) => p.lat.toFixed(5) + ', ' + p.lng.toFixed(5);
 
-/**
- * Karte zum Markieren des Einsatzorts. Lädt erst nach Klick auf «Karte öffnen»,
- * damit ohne Zustimmung nichts von swisstopo geladen wird.
- */
+/** Karte zum Markieren des Einsatzorts, direkt geöffnet */
 export function LocationPicker({ value, onChange }: { value: LatLng | null; onChange: (p: LatLng | null) => void }) {
-  const [open, setOpen] = useState(false);
   const [layer, setLayer] = useState<keyof typeof TILES>('luftbild');
   const boxRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<LMap | null>(null);
@@ -32,7 +27,7 @@ export function LocationPicker({ value, onChange }: { value: LatLng | null; onCh
   onChangeRef.current = onChange;
 
   useEffect(() => {
-    if (!open || !boxRef.current) return;
+    if (!boxRef.current) return;
     let cancelled = false;
     import('leaflet').then((L) => {
       if (cancelled || !boxRef.current) return;
@@ -58,26 +53,13 @@ export function LocationPicker({ value, onChange }: { value: LatLng | null; onCh
       mapRef.current = null;
       markerRef.current = null;
     };
-    // Karte nur beim Öffnen aufbauen
+    // Karte nur einmal aufbauen
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
+  }, []);
 
   useEffect(() => {
     tilesRef.current?.setUrl(TILES[layer]);
   }, [layer]);
-
-  if (!open) {
-    return (
-      <div className="map-picker map-picker--closed">
-        <Button size="sm" variant="outline" icon="map-pin" onClick={() => setOpen(true)}>
-          Standort auf Karte markieren
-        </Button>
-        <span className="field-hint" style={{ marginTop: 0 }}>
-          Lädt eine Karte von swisstopo (map.geo.admin.ch).
-        </span>
-      </div>
-    );
-  }
 
   return (
     <div className="map-picker">

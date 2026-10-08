@@ -457,6 +457,12 @@ button {
 .btn--onDark:hover {
   --btn-bd: #fff;
 }
+/* Alle Buttons, die zu WhatsApp führen */
+.btn--whatsapp {
+  --btn-bg: var(--whatsapp);
+  --btn-hover: var(--whatsapp-hover);
+  --btn-fg: #fff;
+}
 .btn--full {
   display: flex;
   width: 100%;
@@ -1156,27 +1162,71 @@ button {
   justify-content: center;
   gap: 12px;
   height: var(--jobbar-h);
-  padding: 0 clamp(20px, 4vw, 32px);
-  background: var(--action-primary);
-  color: #fff;
+  position: relative;
+  padding: 0 clamp(44px, 9vw, 150px);
+  background: var(--hazard-yellow);
+  color: var(--hazard-black);
   text-decoration: none;
   white-space: nowrap;
   overflow: hidden;
   transition: background var(--dur-base) var(--ease-out);
 }
 .nav__jobbar:hover {
-  background: var(--action-primary-hover);
-  color: #fff;
+  background: var(--hazard-yellow-hover);
+  color: var(--hazard-black);
+}
+/* Gelb-schwarze Warnstreifen links und rechts, laufen langsam durch */
+.nav__jobbar::before,
+.nav__jobbar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(28px, 7vw, 120px);
+  background: linear-gradient(-45deg, var(--hazard-black) 25%, transparent 25% 50%, var(--hazard-black) 50% 75%, transparent 75%) 0 0 / 28px 28px;
+  animation: fl-hazard 1.2s linear infinite;
+}
+.nav__jobbar::before {
+  left: 0;
+}
+.nav__jobbar::after {
+  right: 0;
+}
+@keyframes fl-hazard {
+  to {
+    background-position: 28px 0;
+  }
+}
+/* Lichtreflex, der alle paar Sekunden über den Balken streicht */
+.nav__jobbar-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 40%, rgba(255, 255, 255, 0.55) 50%, transparent 60%) no-repeat;
+  background-size: 50% 100%;
+  background-position: -100% 0;
+  animation: fl-shine 4.5s var(--ease-out) infinite;
+  pointer-events: none;
+}
+@keyframes fl-shine {
+  0%,
+  55% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 .nav__jobbar .job__pulse {
   flex: none;
-  background: #fff;
+  background: var(--signal-500);
 }
 .nav__jobbar-label {
-  font: 500 12px/1 var(--font-ui);
+  padding: 5px 8px;
+  background: var(--hazard-black);
+  color: var(--hazard-yellow);
+  font: 600 12px/1 var(--font-ui);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--pine-100);
 }
 .nav__jobbar-text {
   font: 500 16px/1 var(--font-display);
@@ -1190,7 +1240,7 @@ button {
   font: 500 12px/1 var(--font-ui);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  border-bottom: 1.5px solid var(--hazard-black);
   padding-bottom: 2px;
 }
 @media (max-width: 640px) {
@@ -1208,12 +1258,6 @@ button {
 }
 
 /* Karte im Kontaktformular */
-.map-picker--closed {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 14px;
-}
 .map-picker {
   position: relative;
 }

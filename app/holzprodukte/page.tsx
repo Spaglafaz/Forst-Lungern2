@@ -88,7 +88,7 @@ export default function HolzproduktePage() {
             <SectionHeading title="WhatsApp" subtitle="Schnell nachfragen" />
             <p style={{ margin: '22px 0 0', maxWidth: '62ch' }}>Schreiben Sie uns, was Sie brauchen. Antwort in der Regel innert 1 Arbeitstag.</p>
             <div style={{ marginTop: 24 }}>
-              <Button size="sm" variant="secondary" icon="message-circle" href={CONTACT.whatsappProdukte}>
+              <Button size="sm" variant="whatsapp" icon="message-circle" href={CONTACT.whatsappProdukte}>
                 WhatsApp
               </Button>
             </div>

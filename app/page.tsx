@@ -24,7 +24,7 @@ export default function HomePage() {
         <Button size="lg" icon="phone" href="/#ansprechperson">
           Anrufen
         </Button>
-        <Button size="lg" variant="onDark" icon="message-circle" href={CONTACT.whatsapp}>
+        <Button size="lg" variant="whatsapp" icon="message-circle" href={CONTACT.whatsapp}>
           WhatsApp
         </Button>
       </PageHero>
@@ -185,7 +185,7 @@ export default function HomePage() {
               <Button icon="phone" href={CONTACT.tel}>
                 {CONTACT.telLabel}
               </Button>
-              <Button variant="onDark" icon="message-circle" href={CONTACT.whatsapp}>
+              <Button variant="whatsapp" icon="message-circle" href={CONTACT.whatsapp}>
                 WhatsApp
               </Button>
               <Button variant="onDark" arrow href="/kontakt">

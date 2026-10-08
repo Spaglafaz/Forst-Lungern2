@@ -52,7 +52,7 @@ export default function DatenschutzPage() {
               Formulardaten und Ihre IP-Adresse an FormSubmit übermittelt, möglicherweise auch ins Ausland. Wer das nicht möchte, erreicht uns per Telefon
               oder E-Mail.
             </p>
-            <p style={{ margin: '10px 0 0' }}>Karten: Die Links zu Google Maps oder Swisstopo öffnen den jeweiligen Dienst extern. Im Kontaktformular wird eine Karte von swisstopo (Bundesamt für Landestopografie) erst geladen, wenn Sie auf «Standort auf Karte markieren» klicken; dabei wird Ihre IP-Adresse an map.geo.admin.ch übermittelt.</p>
+            <p style={{ margin: '10px 0 0' }}>Karten: Die Links zu Google Maps oder Swisstopo öffnen den jeweiligen Dienst extern. Im Kontaktformular wird eine Karte von swisstopo (Bundesamt für Landestopografie) angezeigt; dabei wird Ihre IP-Adresse an map.geo.admin.ch übermittelt.</p>
             <p style={{ margin: '10px 0 0' }}>Schriften und Statistik: Schriften werden lokal gehostet. Wir setzen keine Cookies und keine Tracking-Dienste ein.</p>
           </LegalBlock>
           <LegalBlock title="Ihre Rechte">

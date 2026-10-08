@@ -8,7 +8,7 @@ import { gsap, useGSAP, finePointer, motionEnabled } from '../motion/gsap';
 
 type Props = {
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'outline' | 'onDark';
+  variant?: 'primary' | 'secondary' | 'outline' | 'onDark' | 'whatsapp';
   size?: 'sm' | 'md' | 'lg';
   arrow?: boolean;
   icon?: string;

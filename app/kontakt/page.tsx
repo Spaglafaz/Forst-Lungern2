@@ -41,7 +41,7 @@ export default function KontaktPage() {
                 </a>
               </div>
               <div style={{ marginTop: 20 }}>
-                <Button size="sm" variant="secondary" icon="message-circle" href={CONTACT.whatsapp}>
+                <Button size="sm" variant="whatsapp" icon="message-circle" href={CONTACT.whatsapp}>
                   WhatsApp
                 </Button>
               </div>

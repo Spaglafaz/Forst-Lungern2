@@ -80,7 +80,7 @@ export function JobPosting({ job }: { job: Job }) {
             <Button variant="onDark" icon="phone" href={CONTACT.call}>
               Anrufen
             </Button>
-            <Button variant="onDark" icon="message-circle" href={CONTACT.whatsapp}>
+            <Button variant="whatsapp" icon="message-circle" href={CONTACT.whatsapp}>
               WhatsApp
             </Button>
           </div>
