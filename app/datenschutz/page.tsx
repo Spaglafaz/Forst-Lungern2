@@ -27,7 +27,7 @@ export default function DatenschutzPage() {
           <LegalBlock title="Welche Daten wir bearbeiten">
             <p style={{ margin: '14px 0 0' }}>
               Wenn Sie uns über das Kontaktformular, per E-Mail, Telefon oder WhatsApp kontaktieren, bearbeiten wir die Angaben, die Sie uns übermitteln: Name,
-              Telefon, E-Mail, Einsatzort, Nachricht und allfällige Fotos.
+              Telefon, E-Mail, Einsatzort, auf der Karte markierter Standort, Nachricht und allfällige Dateien.
             </p>
           </LegalBlock>
           <LegalBlock title="Zweck und Aufbewahrung">
@@ -47,7 +47,12 @@ export default function DatenschutzPage() {
               WhatsApp: Wenn Sie uns über den WhatsApp-Link kontaktieren, werden Daten an Meta Platforms (USA) übermittelt. Der Link öffnet WhatsApp erst nach
               Ihrem Klick. Als Alternative steht das Kontaktformular zur Verfügung.
             </p>
-            <p style={{ margin: '10px 0 0' }}>Karten: Wir binden keine Karte ein. Der Link zu Google Maps oder Swisstopo öffnet den jeweiligen Dienst extern.</p>
+            <p style={{ margin: '10px 0 0' }}>
+              Kontaktformular: Die Angaben im Formular werden über den Dienst FormSubmit (formsubmit.co) als E-Mail an uns weitergeleitet. Dabei werden die
+              Formulardaten und Ihre IP-Adresse an FormSubmit übermittelt, möglicherweise auch ins Ausland. Wer das nicht möchte, erreicht uns per Telefon
+              oder E-Mail.
+            </p>
+            <p style={{ margin: '10px 0 0' }}>Karten: Die Links zu Google Maps oder Swisstopo öffnen den jeweiligen Dienst extern. Im Kontaktformular wird eine Karte von swisstopo (Bundesamt für Landestopografie) erst geladen, wenn Sie auf «Standort auf Karte markieren» klicken; dabei wird Ihre IP-Adresse an map.geo.admin.ch übermittelt.</p>
             <p style={{ margin: '10px 0 0' }}>Schriften und Statistik: Schriften werden lokal gehostet. Wir setzen keine Cookies und keine Tracking-Dienste ein.</p>
           </LegalBlock>
           <LegalBlock title="Ihre Rechte">

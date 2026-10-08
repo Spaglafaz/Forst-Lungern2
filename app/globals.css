@@ -1144,6 +1144,138 @@ button {
   -webkit-backdrop-filter: blur(6px);
   transition: background var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
 }
+.nav--with-bar {
+  height: calc(var(--nav-h) + var(--jobbar-h));
+}
+.nav--with-bar .nav__inner {
+  height: var(--nav-h);
+}
+.nav__jobbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: var(--jobbar-h);
+  padding: 0 clamp(20px, 4vw, 32px);
+  background: var(--action-primary);
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: background var(--dur-base) var(--ease-out);
+}
+.nav__jobbar:hover {
+  background: var(--action-primary-hover);
+  color: #fff;
+}
+.nav__jobbar .job__pulse {
+  flex: none;
+  background: #fff;
+}
+.nav__jobbar-label {
+  font: 500 12px/1 var(--font-ui);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pine-100);
+}
+.nav__jobbar-text {
+  font: 500 16px/1 var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nav__jobbar-cta {
+  margin-left: 8px;
+  font: 500 12px/1 var(--font-ui);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  padding-bottom: 2px;
+}
+@media (max-width: 640px) {
+  .nav__jobbar-label {
+    display: none;
+  }
+  .nav__jobbar-text {
+    font-size: 14px;
+  }
+}
+@media (max-width: 480px) {
+  .nav__jobbar-cta {
+    display: none;
+  }
+}
+
+/* Karte im Kontaktformular */
+.map-picker--closed {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+.map-picker {
+  position: relative;
+}
+.map-picker__map {
+  height: clamp(240px, 40vw, 320px);
+  border: 1px solid var(--border-subtle);
+  background: var(--sand-200);
+  z-index: 0;
+}
+.map-picker__layers {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 500;
+  display: flex;
+  box-shadow: var(--shadow-card);
+}
+.map-picker__layers button {
+  padding: 7px 12px;
+  border: 0;
+  background: var(--surface-card);
+  font: 500 11px/1 var(--font-ui);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-body);
+  cursor: pointer;
+}
+.map-picker__layers button.is-active {
+  background: var(--action-primary);
+  color: #fff;
+}
+.map-picker__info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 16px;
+  margin-top: 8px;
+  font: 400 14px/1.4 var(--font-serif);
+  color: var(--text-muted);
+}
+.map-picker__info strong {
+  color: var(--text-strong);
+}
+.link-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--action-primary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.map-pin span {
+  display: block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50% 50% 50% 0;
+  background: var(--action-primary);
+  border: 3px solid #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  transform: rotate(-45deg);
+}
 .nav.is-scrolled {
   background: rgba(18, 36, 26, 0.94);
   box-shadow: 0 10px 30px -18px rgba(0, 0, 0, 0.6);
@@ -1660,7 +1792,7 @@ html.has-motion .curtain--intro .curtain__logo {
 .job-teaser {
   background: var(--pine-700);
   color: #fff;
-  padding: 28px 0;
+  padding: clamp(36px, 5vw, 52px) 0;
 }
 .job-teaser__inner {
   display: flex;
@@ -1670,8 +1802,8 @@ html.has-motion .curtain--intro .curtain__logo {
   flex-wrap: wrap;
 }
 .job-teaser__title {
-  margin: 8px 0 0;
-  font: 500 clamp(20px, 2.4vw, 26px)/1.15 var(--font-display);
+  margin: 10px 0 0;
+  font: 500 clamp(24px, 3vw, 34px)/1.15 var(--font-display);
   text-transform: uppercase;
   color: #fff;
 }

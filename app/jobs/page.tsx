@@ -29,7 +29,7 @@ export default function JobsPage() {
                   <Button arrow href="/jobs#stelle">
                     Zum Inserat
                   </Button>
-                  <Button variant="outline" icon="phone" href={CONTACT.tel}>
+                  <Button variant="outline" icon="phone" href={CONTACT.call}>
                     Anrufen
                   </Button>
                 </div>
@@ -45,7 +45,7 @@ export default function JobsPage() {
                   <Button icon="mail" href={CONTACT.mail + '?subject=Initiativbewerbung'}>
                     Bewerbung senden
                   </Button>
-                  <Button variant="outline" icon="phone" href={CONTACT.tel}>
+                  <Button variant="outline" icon="phone" href={CONTACT.call}>
                     Anrufen
                   </Button>
                 </div>

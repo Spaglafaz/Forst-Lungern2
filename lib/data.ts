@@ -11,6 +11,14 @@ export const CONTACT = {
   mail: 'mailto:info@forst-lungern.ch',
   mailLabel: 'info@forst-lungern.ch',
   address: 'Forst Lungern AG · Sattelwaldweg 4 · 6078 Lungern',
+  /** Ziel der «Anrufen»-Buttons: Kontaktdaten von Armin Imfeld auf der Kontaktseite */
+  call: '/kontakt#ansprechperson',
+  /** Direkte E-Mail der Ansprechperson */
+  personMail: 'mailto:armin.imfeld@forst-lungern.ch',
+  personMailLabel: 'armin.imfeld@forst-lungern.ch',
+  /** Standort Werkhof Hackern */
+  mapsGoogle: 'https://www.google.com/maps/search/?api=1&query=Forstwerkhof+Hackern+Lungern',
+  mapsSwisstopo: 'https://s.geo.admin.ch/gc1en7gwlxcf',
 };
 
 /** Richtpreise anzeigen (entspricht der Option «showPrices» im Entwurf). */
@@ -224,6 +232,15 @@ export const LEHRE = [
   { n: '03', title: 'Drei Jahre Lehre', text: 'Arbeit im Betrieb, ein Tag Berufsfachschule pro Woche und überbetriebliche Kurse.' },
   { n: '04', title: 'Abschluss EFZ', text: 'Qualifikationsverfahren und eidgenössisches Fähigkeitszeugnis Forstwart/in EFZ.' },
 ];
+
+/**
+ * Versand des Kontaktformulars über FormSubmit (formsubmit.co) an Armin Imfeld.
+ * Die erste Anfrage löst eine Bestätigungs-Mail an diese Adresse aus («Activate» klicken).
+ * Danach kann die E-Mail-Adresse hier durch die zugeschickte Zufallszeichenfolge ersetzt werden.
+ */
+export const FORM_ENDPOINT = 'https://formsubmit.co/ajax/armin.imfeld@forst-lungern.ch';
+/** Max. Gesamtgrösse der Anhänge (Grenze von FormSubmit) */
+export const FORM_MAX_BYTES = 10 * 1024 * 1024;
 
 export const ANLIEGEN = ['Holzprodukte', 'Holzerei/Baumpflege', 'Verbauungen', 'Winterdienst', 'Stelle/Lehre', 'Anderes'];
 

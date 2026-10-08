@@ -76,7 +76,7 @@ export default function UeberUnsPage() {
       <section className="section" style={{ paddingBottom: 0 }}>
         <div className="container">
           <div data-reveal="" className="split split--end">
-            <SectionHeading title="Unser Team" subtitle="Rund zehn Forstwarte, Maschinisten und Lernende" />
+            <SectionHeading title="Unser Team" subtitle="14 Forstwarte, Maschinisten und Lernende" />
             <p style={{ margin: 0, maxWidth: '62ch' }}>
               Wir kennen die Hänge rund um Lungern seit Jahrzehnten. Im Team arbeiten erfahrene Forstwarte, Maschinisten und Lernende – vom Seilkran bis
               zur Motorsäge alles aus eigener Hand.

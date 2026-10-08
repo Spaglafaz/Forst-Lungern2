@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { PageHero } from '@/components/site/PageHero';
 import { Button } from '@/components/ds/Button';
 import { SectionHeading } from '@/components/ds/SectionHeading';
-import { ImageSlot } from '@/components/ds/ImageSlot';
 import { Icon } from '@/components/ds/Icon';
 import { ZoomImage } from '@/components/ds/ZoomImage';
 import { ContactForm } from '@/components/site/ContactForm';
@@ -23,7 +22,7 @@ export default function KontaktPage() {
           className="container"
           style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,300px),1fr))', gap: 'clamp(40px,6vw,72px)' }}
         >
-          <div data-reveal="" style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
+          <div id="ansprechperson" data-reveal="" style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
             <div className="polaroid-frame" data-pop="-3" style={{ position: 'relative', width: 150, aspectRatio: '4/5', transform: 'rotate(-3deg)', flex: 'none', overflow: 'hidden' }}>
               <Image src={asset('/assets/portraits/portrait-armin-kontakt.webp')} alt="Armin Imfeld" fill sizes="150px" style={{ objectFit: 'cover' }} />
             </div>
@@ -36,9 +35,9 @@ export default function KontaktPage() {
                   <Icon name="phone" size={18} color="var(--pine-600)" />
                   <span className="contact-line__text">{CONTACT.telLabel}</span>
                 </a>
-                <a href={CONTACT.mail} className="contact-line" style={{ fontSize: 17, gap: 10 }}>
+                <a href={CONTACT.personMail} className="contact-line" style={{ fontSize: 17, gap: 10 }}>
                   <Icon name="mail" size={18} color="var(--pine-600)" />
-                  <span className="contact-line__text">{CONTACT.mailLabel}</span>
+                  <span className="contact-line__text">{CONTACT.personMailLabel}</span>
                 </a>
               </div>
               <div style={{ marginTop: 20 }}>
@@ -77,14 +76,20 @@ export default function KontaktPage() {
 
           <div data-reveal="">
             <div className="eyebrow">Karte</div>
-            <div className="card" style={{ marginTop: 14, position: 'relative', aspectRatio: '4/3', background: 'var(--sand-200)' }}>
-              <ImageSlot label="Statisches Kartenbild Werkhof Hackern" />
-            </div>
+            <a
+              href={CONTACT.mapsSwisstopo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card"
+              style={{ display: 'block', marginTop: 14, position: 'relative', aspectRatio: '4/3', background: 'var(--sand-200)', overflow: 'hidden' }}
+            >
+              <Image src={PH + 'karte-werkhof-hackern.png'} alt="Luftbild Forstwerkhof Hackern, Lungern" fill sizes="(max-width: 700px) 100vw, 400px" style={{ objectFit: 'cover' }} />
+            </a>
             <div className="btn-row" style={{ gap: 10, marginTop: 14 }}>
-              <Button size="sm" variant="outline" icon="map-pin" href="https://www.google.com/maps/search/?api=1&query=Forstwerkhof+Hackern+Lungern">
+              <Button size="sm" variant="outline" icon="map-pin" href={CONTACT.mapsGoogle}>
                 Google Maps
               </Button>
-              <Button size="sm" variant="outline" icon="map" href="https://map.geo.admin.ch/?swisssearch=Lungern">
+              <Button size="sm" variant="outline" icon="map" href={CONTACT.mapsSwisstopo}>
                 Swisstopo
               </Button>
             </div>
@@ -102,10 +107,10 @@ export default function KontaktPage() {
           <div data-reveal="">
             <SectionHeading title="Kontaktformular" subtitle="Wir melden uns in der Regel innert 1 Arbeitstag" />
             <p style={{ margin: '26px 0 0', maxWidth: '52ch' }}>
-              Ein Telefon für den Rückruf ist im Forst meist schneller als E-Mail. Bei Bäumen im Garten helfen Fotos sehr – bis zu drei Bilder.
+              Ein Telefon für den Rückruf ist im Forst meist schneller als E-Mail. Bei Bäumen im Garten helfen Fotos sehr – bis zu drei Dateien. Den genauen Ort können Sie direkt auf der Karte markieren.
             </p>
             <p style={{ margin: '16px 0 0', maxWidth: '52ch', fontSize: 15, color: 'var(--text-muted)' }}>
-              Ihre Anfrage geht an info@forst-lungern.ch. Wer WhatsApp nicht nutzen möchte, ist mit dem Formular gleich gut bedient.
+              Ihre Anfrage geht direkt an Armin Imfeld. Wer WhatsApp nicht nutzen möchte, ist mit dem Formular gleich gut bedient.
             </p>
             <ZoomImage src={PH + 'seilkran-tal-panorama.jpg'} alt="Seilkran über dem Tal" pos="center 60%" style={{ marginTop: 40 }} />
           </div>

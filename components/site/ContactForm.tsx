@@ -1,15 +1,16 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { ANLIEGEN, CONTACT } from '@/lib/data';
+import { ANLIEGEN, CONTACT, FORM_ENDPOINT, FORM_MAX_BYTES } from '@/lib/data';
 import { Button } from '../ds/Button';
 import { Icon } from '../ds/Icon';
 import { IconBadge } from '../ds/IconBadge';
 import { TLink } from '../motion/TLink';
 import { gsap, useGSAP, motionEnabled } from '../motion/gsap';
+import { LocationPicker, fmtPos, type LatLng } from './LocationPicker';
 
-type Form = { anliegen: string; name: string; tel: string; email: string; ort: string; msg: string; ds: boolean; hp: string };
-const EMPTY: Form = { anliegen: '', name: '', tel: '', email: '', ort: '', msg: '', ds: false, hp: '' };
+type Form = { anliegen: string; name: string; tel: string; email: string; ort: string; pos: LatLng | null; msg: string; ds: boolean; hp: string };
+const EMPTY: Form = { anliegen: '', name: '', tel: '', email: '', ort: '', pos: null, msg: '', ds: false, hp: '' };
 
 function Field({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
   return (
@@ -25,7 +26,8 @@ export function ContactForm() {
   const [form, setForm] = useState<Form>(EMPTY);
   const [sent, setSent] = useState(false);
   const [err, setErr] = useState('');
-  const [files, setFiles] = useState(0);
+  const [files, setFiles] = useState<File[]>([]);
+  const [sending, setSending] = useState(false);
   const boxRef = useRef<HTMLDivElement>(null);
   const errRef = useRef<HTMLDivElement>(null);
   const firstRun = useRef(true);
@@ -74,14 +76,49 @@ export function ContactForm() {
     { dependencies: [sent], scope: boxRef, revertOnUpdate: false },
   );
 
-  const submit = (e: React.FormEvent) => {
+  const pickFiles = (list: FileList | null) => {
+    const picked = Array.from(list ?? []).slice(0, 3);
+    if (picked.reduce((n, f) => n + f.size, 0) > FORM_MAX_BYTES) {
+      setFiles([]);
+      return setErr('Die Dateien sind zusammen grösser als 10 MB. Bitte kleinere oder weniger Dateien wählen.');
+    }
+    setFiles(picked);
+    setErr('');
+  };
+
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (form.hp) return;
+    if (sending) return;
+    if (form.hp) return setSent(true);
     if (!form.anliegen || !form.name.trim() || !form.tel.trim() || !form.msg.trim()) return setErr('Bitte füllen Sie alle Pflichtfelder aus.');
     if (!form.ds) return setErr('Bitte bestätigen Sie die Datenschutzerklärung.');
-    // TODO: Anbindung an Versand (z.B. Route Handler, der an info@forst-lungern.ch mailt)
-    setSent(true);
+
+    const data = new FormData();
+    data.append('_subject', `Anfrage Website: ${form.anliegen} – ${form.name.trim()}`);
+    data.append('_template', 'table');
+    data.append('_captcha', 'false');
+    if (form.email.trim()) data.append('_replyto', form.email.trim());
+    data.append('Anliegen', form.anliegen);
+    data.append('Name', form.name.trim());
+    data.append('Telefon', form.tel.trim());
+    data.append('E-Mail', form.email.trim() || '–');
+    data.append('Adresse / Ort', form.ort.trim() || '–');
+    data.append('Standort (Karte)', form.pos ? `${fmtPos(form.pos)} – https://www.google.com/maps?q=${form.pos.lat.toFixed(6)},${form.pos.lng.toFixed(6)}` : '–');
+    data.append('Nachricht', form.msg.trim());
+    files.forEach((f, i) => data.append(i === 0 ? 'attachment' : 'attachment' + (i + 1), f, f.name));
+
+    setSending(true);
     setErr('');
+    try {
+      const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      const json = await res.json().catch(() => null);
+      if (!res.ok || (json && String(json.success) !== 'true')) throw new Error(json?.message || 'Versand fehlgeschlagen');
+      setSent(true);
+    } catch {
+      setErr(`Die Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es später nochmals oder rufen Sie an: ${CONTACT.telLabel}.`);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -104,7 +141,7 @@ export function ContactForm() {
               onClick={() => {
                 setSent(false);
                 setForm(EMPTY);
-                setFiles(0);
+                setFiles([]);
               }}
             >
               Neue Anfrage
@@ -138,24 +175,28 @@ export function ContactForm() {
               <input value={form.ort} onChange={(e) => set('ort', e.target.value)} autoComplete="street-address" />
             </Field>
           </div>
+          <div>
+            <div className="field-label">Genauer Standort (optional)</div>
+            <LocationPicker value={form.pos} onChange={(p) => set('pos', p)} />
+          </div>
           <Field label="Nachricht *">
             <textarea rows={5} value={form.msg} onChange={(e) => set('msg', e.target.value)} />
           </Field>
           <div>
-            <div className="field-label">Fotos hochladen (max. 3 Bilder)</div>
+            <div className="field-label">Dateien hochladen (max. 3 Dateien)</div>
             <label className="file-input">
               <Icon name="upload" size={16} />
-              Bilder wählen
+              Datei wählen
               <input
                 type="file"
-                accept="image/*"
+                accept="image/*,.pdf"
                 multiple
-                onChange={(e) => setFiles(Math.min(3, e.target.files?.length ?? 0))}
+                onChange={(e) => pickFiles(e.target.files)}
                 style={{ position: 'absolute', width: 1, height: 1, opacity: 0, pointerEvents: 'none' }}
               />
             </label>
             <div style={{ marginTop: 6, fontSize: 14, color: 'var(--text-muted)' }}>
-              {files ? files + (files === 1 ? ' Bild ausgewählt' : ' Bilder ausgewählt') : 'Noch keine Bilder ausgewählt'}
+              {files.length ? files.map((f) => f.name).join(', ') : 'Noch keine Datei ausgewählt'}
             </div>
           </div>
           <input
@@ -185,8 +226,8 @@ export function ContactForm() {
             </div>
           )}
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
-            <Button type="submit" arrow>
-              Anfrage senden
+            <Button type="submit" arrow={!sending}>
+              {sending ? 'Wird gesendet …' : 'Anfrage senden'}
             </Button>
             <span style={{ fontSize: 14, color: 'var(--text-muted)' }}>* Pflichtfelder</span>
           </div>

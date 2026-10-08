@@ -21,7 +21,7 @@ export default function HomePage() {
         title="Für einen sicheren und gesunden Wald in Lungern"
         text="Holzerei, Schutzwaldpflege, Verbauungen, Steinschlagnetze und Winterdienst – aus einer Hand, vom Werkhof Hackern in Lungern."
       >
-        <Button size="lg" icon="phone" href={CONTACT.tel}>
+        <Button size="lg" icon="phone" href="/#ansprechperson">
           Anrufen
         </Button>
         <Button size="lg" variant="onDark" icon="message-circle" href={CONTACT.whatsapp}>
@@ -72,7 +72,7 @@ export default function HomePage() {
                 {JOBS[0].title} {JOBS[0].pensum}
               </p>
             </div>
-            <Button variant="onDark" arrow href="/jobs#stelle">
+            <Button arrow href="/jobs#stelle">
               Zur Stelle
             </Button>
           </div>
@@ -94,8 +94,7 @@ export default function HomePage() {
           <div className="stat" data-reveal="">
             <span className="stat__line" />
             <div className="stat__value">
-              <span className="stat__pre">rund</span>
-              <span data-count="10">10</span>
+              <span data-count="14">14</span>
             </div>
             <div className="stat__label">Mitarbeitende</div>
           </div>
@@ -198,7 +197,7 @@ export default function HomePage() {
       </section>
 
       {/* Ansprechperson */}
-      <section className="section">
+      <section className="section" id="ansprechperson">
         <div className="container split" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,320px),1fr))' }}>
           <div data-reveal="scale" style={{ maxWidth: 420, width: '100%', justifySelf: 'center' }}>
             <div className="polaroid-frame" style={{ position: 'relative', aspectRatio: '4/5', transform: 'rotate(-3deg)', overflow: 'hidden' }}>
@@ -220,9 +219,9 @@ export default function HomePage() {
                 <IconBadge icon="message-circle" size={40} />
                 <span className="contact-line__text">WhatsApp</span>
               </a>
-              <a href={CONTACT.mail} className="contact-line">
+              <a href={CONTACT.personMail} className="contact-line">
                 <IconBadge icon="mail" size={40} />
-                <span className="contact-line__text">{CONTACT.mailLabel}</span>
+                <span className="contact-line__text">{CONTACT.personMailLabel}</span>
               </a>
             </div>
           </div>

@@ -19,6 +19,8 @@ export function Nav() {
   const linksRef = useRef<HTMLElement>(null);
   const indicatorRef = useRef<HTMLSpanElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
+  // Balken mit offener Stelle, ausser auf der Jobs-Seite selbst
+  const showJobBar = JOBS.length > 0 && !pathname.startsWith('/jobs');
 
   /* Einblenden, Verstecken beim Runterscrollen, Fortschrittsbalken */
   useGSAP(
@@ -76,7 +78,19 @@ export function Nav() {
 
   return (
     <>
-      <header className="nav" ref={headerRef}>
+      <header className={'nav' + (showJobBar ? ' nav--with-bar' : '')} ref={headerRef}>
+        {showJobBar && (
+          <TLink href="/jobs#stelle" className="nav__jobbar">
+            <span className="job__pulse" aria-hidden />
+            <span className="nav__jobbar-label">Offene Stelle</span>
+            <span className="nav__jobbar-text">
+              {JOBS[0].title} {JOBS[0].pensum}
+            </span>
+            <span className="nav__jobbar-cta">
+              Zum Inserat <span aria-hidden>→</span>
+            </span>
+          </TLink>
+        )}
         <div className="nav__inner">
           <TLink href="/" className="nav__logo" aria-label="Forst Lungern AG – Startseite">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -165,7 +179,7 @@ function MobileMenu() {
         ))}
       </nav>
       <div className="menu__actions">
-        <Button icon="phone" href={CONTACT.tel}>
+        <Button icon="phone" href={CONTACT.call}>
           Anrufen
         </Button>
         <Button variant="onDark" icon="message-circle" href={CONTACT.whatsapp}>
@@ -184,10 +198,10 @@ function MobileBar() {
   });
   return (
     <div className="mobile-bar" ref={ref}>
-      <a href={CONTACT.tel} style={{ background: 'var(--action-primary)' }}>
+      <TLink href={CONTACT.call} style={{ background: 'var(--action-primary)' }}>
         <Icon name="phone" size={18} color="#fff" />
         Anrufen
-      </a>
+      </TLink>
       <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" style={{ background: 'var(--action-secondary)' }}>
         <Icon name="message-circle" size={18} color="#fff" />
         WhatsApp

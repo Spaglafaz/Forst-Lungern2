@@ -68,7 +68,7 @@ Bei «Bewegung reduzieren» (prefers-reduced-motion) werden alle Animationen und
 
 ## Offene Punkte
 
-- **Formularversand**: Das Formular validiert und zeigt die Bestätigung, verschickt aber noch nichts (wie im Entwurf). Für den Versand an info@forst-lungern.ch auf statischem Hosting einen Formular-Dienst (z.B. Formspree, Web3Forms) oder ein eigenes Backend anbinden.
+- **Formularversand**: läuft über FormSubmit (`FORM_ENDPOINT` in `lib/data.ts`) an armin.imfeld@forst-lungern.ch. Die erste Anfrage löst eine Bestätigungs-Mail aus, die einmal mit «Activate» bestätigt werden muss. Danach die E-Mail-Adresse im Endpunkt durch die zugeschickte Zufallszeichenfolge ersetzen (schützt vor Spam).
 - **Fotos fehlen noch** für Produkte, drei Maschinen (Unitrac, MB Trac, Kramer) und das Kartenbild – dort stehen Platzhalter (`ImageSlot`).
 - **Logo**: `logo-white.png` / `logo-dark.png` wurden automatisch aus `logo.png` freigestellt. Eine Vektor-Version (SVG) wäre besser.
 - Preise sind Platzhalter (siehe Hinweis auf der Produktseite), Datenschutztext ist ein Entwurf.

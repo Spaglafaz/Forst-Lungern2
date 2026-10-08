@@ -88,7 +88,7 @@ export default async function LeistungPage({ params }: Params) {
               <h3 style={{ margin: 0, font: 'var(--type-h3)', textTransform: 'uppercase', color: '#fff' }}>Anliegen besprechen</h3>
               <p style={{ margin: '10px 0 0', color: 'rgba(255,255,255,.85)' }}>Wir schauen uns die Situation vor Ort an und machen Ihnen eine Offerte.</p>
               <div className="btn-row" style={{ gap: 12, marginTop: 22 }}>
-                <Button icon="phone" href={CONTACT.tel}>
+                <Button icon="phone" href={CONTACT.call}>
                   Anrufen
                 </Button>
                 <Button variant="onDark" arrow href={kontaktHref(svc.anliegen, 'Anfrage zu: ' + svc.title + '\n')}>

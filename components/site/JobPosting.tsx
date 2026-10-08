@@ -77,7 +77,7 @@ export function JobPosting({ job }: { job: Job }) {
             <Button icon="mail" href={'mailto:' + job.kontakt.mail + '?subject=' + subject}>
               Jetzt bewerben
             </Button>
-            <Button variant="onDark" icon="phone" href={job.kontakt.tel}>
+            <Button variant="onDark" icon="phone" href={CONTACT.call}>
               Anrufen
             </Button>
             <Button variant="onDark" icon="message-circle" href={CONTACT.whatsapp}>

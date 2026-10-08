@@ -53,7 +53,7 @@
 --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--space-10:128px;
 --section-y:112px;/* @kind spacing */--section-y-sm:72px;/* @kind spacing */--gutter:32px;/* @kind spacing */
 --container:1180px;/* @kind spacing */--container-narrow:760px;/* @kind spacing */--measure:62ch;/* @kind spacing */
---nav-h:76px;/* @kind spacing */
+--nav-h:76px;/* @kind spacing */--jobbar-h:40px;/* @kind spacing */
 --radius-0:0;--radius-1:2px;--radius-2:4px;--radius-pill:999px;
 }
 
