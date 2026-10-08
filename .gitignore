@@ -3,3 +3,6 @@ node_modules
 out
 next-env.d.ts
 *.tsbuildinfo
+
+# Claude Code (persönliche Einstellungen)
+.claude/settings.local.json
