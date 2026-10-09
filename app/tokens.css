@@ -24,8 +24,8 @@
 --action-primary:var(--pine-600);--action-primary-hover:var(--pine-700);--action-primary-press:var(--pine-800);
 --action-secondary:var(--moss-700);--action-secondary-hover:var(--moss-800);
 --action-signal:var(--signal-500);--action-signal-hover:var(--signal-600);
-/* WhatsApp-Grün (Markenfarbe) und Warnmarkierung Gelb-Schwarz wie im Forst */
---whatsapp:#25D366;--whatsapp-hover:#1DA851;--hazard-yellow:#F5C400;--hazard-yellow-hover:#E2B400;--hazard-black:#1C1C1A;
+/* WhatsApp-Grün und what3words-Rot (Markenfarben) sowie Warnmarkierung Gelb-Schwarz wie im Forst */
+--whatsapp:#25D366;--w3w-red:#E11F26;--whatsapp-hover:#1DA851;--hazard-yellow:#F5C400;--hazard-yellow-hover:#E2B400;--hazard-black:#1C1C1A;
 --border-subtle:var(--sand-300);--border-strong:var(--bark-300);--border-focus:var(--pine-500);
 --accent-line:var(--pine-600);
 }

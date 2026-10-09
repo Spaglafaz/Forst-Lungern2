@@ -239,6 +239,11 @@ export const LEHRE = [
  * Danach kann die E-Mail-Adresse hier durch die zugeschickte Zufallszeichenfolge ersetzt werden.
  */
 export const FORM_ENDPOINT = 'https://formsubmit.co/ajax/armin.imfeld@forst-lungern.ch';
+/**
+ * what3words-API-Schlüssel für das Feld «what3words-Adresse» im Formular (Gratis-Plan: nur Vorschläge/AutoSuggest).
+ * Er ist im Browser sichtbar – im what3words-Konto deshalb auf die Website-Domain beschränken.
+ */
+export const W3W_KEY = 'SVB653U4';
 /** Max. Gesamtgrösse der Anhänge (Grenze von FormSubmit) */
 export const FORM_MAX_BYTES = 10 * 1024 * 1024;
 

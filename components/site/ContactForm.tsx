@@ -8,9 +8,10 @@ import { IconBadge } from '../ds/IconBadge';
 import { TLink } from '../motion/TLink';
 import { gsap, useGSAP, motionEnabled } from '../motion/gsap';
 import { LocationPicker, fmtPos, type LatLng } from './LocationPicker';
+import { W3wField } from './W3wField';
 
-type Form = { anliegen: string; name: string; tel: string; email: string; ort: string; pos: LatLng | null; msg: string; hp: string };
-const EMPTY: Form = { anliegen: '', name: '', tel: '', email: '', ort: '', pos: null, msg: '', hp: '' };
+type Form = { anliegen: string; name: string; tel: string; email: string; ort: string; pos: LatLng | null; w3w: string; w3wOk: boolean; msg: string; hp: string };
+const EMPTY: Form = { anliegen: '', name: '', tel: '', email: '', ort: '', pos: null, w3w: '', w3wOk: false, msg: '', hp: '' };
 
 function Field({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
   return (
@@ -103,6 +104,8 @@ export function ContactForm() {
     data.append('E-Mail', form.email.trim() || '–');
     data.append('Adresse / Ort', form.ort.trim() || '–');
     data.append('Standort (Karte)', form.pos ? `${fmtPos(form.pos)} – https://www.google.com/maps?q=${form.pos.lat.toFixed(6)},${form.pos.lng.toFixed(6)}` : '–');
+    const w3w = form.w3w.trim().replace(/^\/+/, '');
+    data.append('what3words', !w3w ? '–' : form.w3wOk ? `///${w3w} – https://w3w.co/${w3w}` : `${w3w} (nicht geprüft)`);
     data.append('Nachricht', form.msg.trim());
     files.forEach((f, i) => data.append(i === 0 ? 'attachment' : 'attachment' + (i + 1), f, f.name));
 
@@ -178,6 +181,13 @@ export function ContactForm() {
             <div className="field-label">Genauer Standort (optional)</div>
             <LocationPicker value={form.pos} onChange={(p) => set('pos', p)} />
           </div>
+          <W3wField
+            value={form.w3w}
+            onChange={(words, ok) => {
+              setForm((f) => ({ ...f, w3w: words, w3wOk: ok }));
+              setErr('');
+            }}
+          />
           <Field label="Nachricht *">
             <textarea rows={5} value={form.msg} onChange={(e) => set('msg', e.target.value)} />
           </Field>
