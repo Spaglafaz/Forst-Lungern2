@@ -252,11 +252,11 @@ export const ANLIEGEN = ['Holzprodukte', 'Holzerei/Baumpflege', 'Verbauungen', '
 export type Hero = { image: string; pos: string; eyebrow: string; title: string; text: string };
 
 export const HEROES: Record<string, Hero> = {
-  ueber: { image: PH + 'seilkran-tal-panorama.jpg', pos: 'center 67%', eyebrow: 'Über uns', title: 'Ein Betrieb für den Lungerer Wald', text: 'Die Forst Lungern AG führt die Forstbetriebe der Teilsamen Lungern-Dorf und Lungern-Obsee seit dem 1. März 2026 gemeinsam.' },
+  ueber: { image: PH + 'seilkran-tal-panorama.jpg', pos: 'center 52%', eyebrow: 'Über uns', title: 'Ein Betrieb für den Lungerer Wald', text: 'Die Forst Lungern AG führt die Forstbetriebe der Teilsamen Lungern-Dorf und Lungern-Obsee seit dem 1. März 2026 gemeinsam.' },
   leistungen: { image: PH + 'seilbahn-tal.jpg', pos: 'center 45%', eyebrow: 'Leistungen', title: 'Was wir für Sie tun', text: 'Sechs Bereiche – vom Schutzwald über Verbauungen und Steinschlagnetze bis zum Winterdienst.' },
-  produkte: { image: PH + 'rundholz-polter.jpg', pos: 'center 60%', eyebrow: 'Holzprodukte', title: 'Holz aus dem Lungerer Wald', text: 'Brennholz, Schnitzel, Rindenmulch und Lärchenpfosten – Schaufenster mit Anfrage, kein Onlineshop.' },
-  maschinen: { image: PH + 'seilkran-bagger-rundholz.jpg', pos: 'center 60%', eyebrow: 'Maschinenpark', title: 'Für steiles Gelände gebaut', text: 'Seilkran, Forstschlepper, Bagger und Transporter – alle Maschinen sind auf die Forst Lungern AG übergegangen.' },
-  jobs: { image: PH + 'holzerei-team-nebel.jpg', pos: 'center 60.5%', eyebrow: 'Jobs & Lehrstellen', title: 'Arbeiten, wo andere wandern', text: 'Offene Stellen, Lehre Forstwart/in EFZ und Schnupperlehre bei einem anerkannten Lehrbetrieb.' },
+  produkte: { image: PH + 'rundholz-polter.jpg', pos: 'center 42%', eyebrow: 'Holzprodukte', title: 'Holz aus dem Lungerer Wald', text: 'Brennholz, Schnitzel, Rindenmulch und Lärchenpfosten – Schaufenster mit Anfrage, kein Onlineshop.' },
+  maschinen: { image: PH + 'seilkran-bagger-rundholz.jpg', pos: 'center 72%', eyebrow: 'Maschinenpark', title: 'Für steiles Gelände gebaut', text: 'Seilkran, Forstschlepper, Bagger und Transporter – alle Maschinen sind auf die Forst Lungern AG übergegangen.' },
+  jobs: { image: PH + 'holzerei-team-nebel.jpg', pos: 'center 50%', eyebrow: 'Jobs & Lehrstellen', title: 'Arbeiten, wo andere wandern', text: 'Offene Stellen, Lehre Forstwart/in EFZ und Schnupperlehre bei einem anerkannten Lehrbetrieb.' },
   kontakt: { image: PH + 'wegunterhalt-team.jpg', pos: 'center 45%', eyebrow: 'Kontakt', title: 'Wir sind für Sie da', text: 'Telefon, WhatsApp oder Formular – Sie erreichen uns von jeder Seite aus mit einem Klick.' },
   impressum: { image: PH + 'waldstrasse-winter-polter.jpg', pos: 'center 55%', eyebrow: 'Rechtliches', title: 'Impressum', text: 'Pflichtangaben der Forst Lungern AG.' },
   datenschutz: { image: PH + 'waldstrasse-winter-polter.jpg', pos: 'center 55%', eyebrow: 'Rechtliches', title: 'Datenschutzerklärung', text: 'Wie wir mit Ihren Daten umgehen.' },
