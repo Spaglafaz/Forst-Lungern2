@@ -1267,6 +1267,15 @@ button {
   background: var(--sand-200);
   z-index: 0;
 }
+.map-picker .map-grid {
+  stroke: #fff;
+  stroke-opacity: 0.45;
+}
+.map-picker .map-cell {
+  stroke: var(--action-primary);
+  fill: var(--action-primary);
+  fill-opacity: 0.35;
+}
 .map-picker__layers {
   position: absolute;
   top: 10px;

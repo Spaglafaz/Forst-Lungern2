@@ -9,8 +9,8 @@ import { TLink } from '../motion/TLink';
 import { gsap, useGSAP, motionEnabled } from '../motion/gsap';
 import { LocationPicker, fmtPos, type LatLng } from './LocationPicker';
 
-type Form = { anliegen: string; name: string; tel: string; email: string; ort: string; pos: LatLng | null; msg: string; ds: boolean; hp: string };
-const EMPTY: Form = { anliegen: '', name: '', tel: '', email: '', ort: '', pos: null, msg: '', ds: false, hp: '' };
+type Form = { anliegen: string; name: string; tel: string; email: string; ort: string; pos: LatLng | null; msg: string; hp: string };
+const EMPTY: Form = { anliegen: '', name: '', tel: '', email: '', ort: '', pos: null, msg: '', hp: '' };
 
 function Field({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
   return (
@@ -91,7 +91,6 @@ export function ContactForm() {
     if (sending) return;
     if (form.hp) return setSent(true);
     if (!form.anliegen || !form.name.trim() || !form.tel.trim() || !form.msg.trim()) return setErr('Bitte füllen Sie alle Pflichtfelder aus.');
-    if (!form.ds) return setErr('Bitte bestätigen Sie die Datenschutzerklärung.');
 
     const data = new FormData();
     data.append('_subject', `Anfrage Website: ${form.anliegen} – ${form.name.trim()}`);
@@ -209,17 +208,9 @@ export function ContactForm() {
             style={{ position: 'absolute', left: -9999, width: 1, height: 1, opacity: 0 }}
             aria-hidden
           />
-          <label className="checkbox">
-            <input type="checkbox" checked={form.ds} onChange={(e) => set('ds', e.target.checked)} />
-            <span className="checkbox__box">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <path d="M4 12.5l5 5L20 6.5" />
-              </svg>
-            </span>
-            <span>
-              Ich habe die <TLink href="/datenschutz">Datenschutzerklärung</TLink> gelesen *
-            </span>
-          </label>
+          <p style={{ margin: 0, fontSize: 14, color: 'var(--text-muted)' }}>
+            Hinweise zum Umgang mit Ihren Angaben finden Sie in der <TLink href="/datenschutz">Datenschutzerklärung</TLink>.
+          </p>
           {err && (
             <div ref={errRef} className="form-error" role="alert">
               {err}

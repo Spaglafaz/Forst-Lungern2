@@ -94,7 +94,7 @@ export default function HomePage() {
           <div className="stat" data-reveal="">
             <span className="stat__line" />
             <div className="stat__value">
-              <span data-count="14">14</span>
+              <span data-count="12">12</span>
             </div>
             <div className="stat__label">Mitarbeitende</div>
           </div>

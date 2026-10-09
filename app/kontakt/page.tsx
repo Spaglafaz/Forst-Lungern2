@@ -19,10 +19,12 @@ export default function KontaktPage() {
 
       <section className="section">
         <div
+          id="ansprechperson"
+          data-scroll="center"
           className="container"
           style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,300px),1fr))', gap: 'clamp(40px,6vw,72px)' }}
         >
-          <div id="ansprechperson" data-reveal="" style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
+          <div data-reveal="" style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
             <div className="polaroid-frame" data-pop="-3" style={{ position: 'relative', width: 150, aspectRatio: '4/5', transform: 'rotate(-3deg)', flex: 'none', overflow: 'hidden' }}>
               <Image src={asset('/assets/portraits/portrait-armin-kontakt.webp')} alt="Armin Imfeld" fill sizes="150px" style={{ objectFit: 'cover' }} />
             </div>

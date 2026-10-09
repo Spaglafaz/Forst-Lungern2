@@ -53,9 +53,11 @@ export function MotionShell({ chrome, children }: { chrome: React.ReactNode; chi
   const scrollToHash = (hash: string) => {
     const el = hash ? document.querySelector<HTMLElement>(hash) : null;
     if (!el) return false;
+    // data-scroll="center": Ziel in die Bildschirmmitte, sofern es ganz Platz hat
+    const center = el.dataset.scroll === 'center' && el.offsetHeight < window.innerHeight - 120;
     const s = smootherRef.current;
-    if (s) s.scrollTo(el, true, 'top 90px');
-    else el.scrollIntoView({ behavior: 'smooth' });
+    if (s) s.scrollTo(el, true, center ? 'center center+=45px' : 'top 90px');
+    else el.scrollIntoView({ behavior: 'smooth', block: center ? 'center' : 'start' });
     return true;
   };
 
