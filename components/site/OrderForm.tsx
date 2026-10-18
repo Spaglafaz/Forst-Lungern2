@@ -319,7 +319,7 @@ export function OrderForm() {
       orderText(),
       '',
       `Lieferart: ${mode === 'lieferung' ? 'Lieferung' : 'Selbstabholung im Forstwerkhof'}`,
-      mode === 'lieferung' && c.pos ? `Abladeort (Karte): ${fmtPos(c.pos)} – ${mapsLink(c.pos)}` : null,
+      c.pos ? `Abladeort (Karte): ${fmtPos(c.pos)} – ${mapsLink(c.pos)}` : null,
       `Wunschtermin: ${c.termin.trim() || '–'}`,
       c.msg.trim() ? `Bemerkungen: ${c.msg.trim()}` : null,
       '',
@@ -364,7 +364,7 @@ export function OrderForm() {
     data.append('Telefon', c.tel.trim());
     data.append('E-Mail', c.email.trim());
     data.append(mode === 'lieferung' ? 'Lieferadresse' : 'Adresse', addressText());
-    if (mode === 'lieferung') data.append('Abladeort (Karte)', c.pos ? `${fmtPos(c.pos)} – ${mapsLink(c.pos)}` : '–');
+    data.append('Abladeort (Karte)', c.pos ? `${fmtPos(c.pos)} – ${mapsLink(c.pos)}` : '–');
     data.append('Wunschtermin', c.termin.trim() || '–');
     data.append('Bemerkungen', c.msg.trim() || '–');
     data.append('Total inkl. MWST', chf(calc.total));
@@ -609,25 +609,25 @@ export function OrderForm() {
                             {chf(p.price)}
                             <small>pro {p.unitLong}</small>
                           </div>
-                          {p.perLength ? (
-                            <div className="prod__qtys">
-                              <QtyStepper value={q} step={p.step} unit={p.unit} label={`${p.name}: Stückzahl`} onChange={(n) => setItems((it) => ({ ...it, [p.id]: n }))} />
-                              <span className="prod__times" aria-hidden>
-                                ×
-                              </span>
-                              <QtyStepper
-                                value={len}
-                                step={p.perLength.step}
-                                unit="m"
-                                label={`${p.name}: Länge pro Stück`}
-                                onChange={(n) => setLens((l) => ({ ...l, [p.id]: n || p.perLength!.step }))}
-                              />
-                              {q > 0 && <span className="prod__lm">= {fmtQty(q * len)} lm</span>}
-                            </div>
-                          ) : (
-                            <QtyStepper value={q} step={p.step} unit={p.unit} label={`${p.name} ${p.detail}`} onChange={(n) => setItems((it) => ({ ...it, [p.id]: n }))} />
-                          )}
+                          <QtyStepper value={q} step={p.step} unit={p.unit} label={p.perLength ? `${p.name}: Stückzahl` : `${p.name} ${p.detail}`} onChange={(n) => setItems((it) => ({ ...it, [p.id]: n }))} />
                           <span className={'line-total' + (q > 0 ? ' is-on' : '')}>{q > 0 ? chf(p.price * len * q) : '–'}</span>
+                          {p.perLength && (
+                            <>
+                              <span className="prod__len-label">
+                                × Länge pro Stück
+                                {q > 0 && <small>= {fmtQty(q * len)} lm total</small>}
+                              </span>
+                              <div className="prod__len">
+                                <QtyStepper
+                                  value={len}
+                                  step={p.perLength.step}
+                                  unit="m"
+                                  label={`${p.name}: Länge pro Stück`}
+                                  onChange={(n) => setLens((l) => ({ ...l, [p.id]: n || p.perLength!.step }))}
+                                />
+                              </div>
+                            </>
+                          )}
                         </div>
                       );
                     })}
@@ -706,12 +706,10 @@ export function OrderForm() {
                     <input value={c.ort} onChange={(e) => setField('ort', e.target.value)} autoComplete="address-level2" placeholder="z.B. 6078 Lungern" aria-invalid={!!err('ort')} />
                   </Field>
                 </div>
-                {mode === 'lieferung' && (
-                  <div>
-                    <div className="field-label">Liefer- bzw. Abladeort auf der Karte (optional)</div>
-                    <LocationPicker value={c.pos} onChange={(p) => setField('pos', p)} />
-                  </div>
-                )}
+                <div>
+                  <div className="field-label">Liefer- bzw. Abladeort auf der Karte (optional)</div>
+                  <LocationPicker value={c.pos} onChange={(p) => setField('pos', p)} />
+                </div>
                 <Field label="Wunschtermin" hint="z.B. «ab Mitte November» oder «Samstagvormittag» – wir bestätigen telefonisch">
                   <input value={c.termin} onChange={(e) => setField('termin', e.target.value)} />
                 </Field>
