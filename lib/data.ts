@@ -163,15 +163,17 @@ export type Product = {
   price: number;
   /** Schrittweite im Mengenfeld */
   step: number;
+  /** Preis pro Laufmeter: Kunde gibt Stückzahl und Länge pro Stück ein */
+  perLength?: { step: number; default: number };
 };
 
 export const PRODUCTS: Product[] = [
   { id: 'sack-25', group: 'Brennholz im Sack', name: 'Buche Brennholz', detail: 'trocken, 25 cm', unit: 'Sack', unitPlural: 'Säcke', unitLong: 'Sack', price: 13, step: 1 },
   { id: 'sack-33', group: 'Brennholz im Sack', name: 'Buche Brennholz', detail: 'trocken, 33 cm', unit: 'Sack', unitPlural: 'Säcke', unitLong: 'Sack', price: 13, step: 1 },
-  { id: 'latten', group: 'Latten & Pfähle', name: 'Latten rund', detail: 'entrindet', unit: 'lm', unitPlural: 'lm', unitLong: 'Laufmeter', price: 5, step: 1 },
+  { id: 'latten', group: 'Latten & Pfähle', name: 'Latten rund', detail: 'entrindet', unit: 'Stk.', unitPlural: 'Stk.', unitLong: 'Laufmeter', price: 5, step: 1, perLength: { step: 0.5, default: 3 } },
   { id: 'zaunpfahl', group: 'Latten & Pfähle', name: 'Zaunpfähle', detail: 'Länge 1.6 m', unit: 'Stk.', unitPlural: 'Stk.', unitLong: 'Stück', price: 5.2, step: 1 },
   { id: 'pfahl', group: 'Latten & Pfähle', name: 'Pfähle', detail: 'Länge 1 m', unit: 'Stk.', unitPlural: 'Stk.', unitLong: 'Stück', price: 4, step: 1 },
-  { id: 'hackschnitzel', group: 'Schüttgut', name: 'Hackschnitzel', detail: 'für Schnitzelheizungen', unit: 'Sm³', unitPlural: 'Sm³', unitLong: 'Schüttkubikmeter', price: 45, step: 1 },
+  { id: 'hackschnitzel', group: 'Schüttgut', name: 'Hackschnitzel', detail: '', unit: 'Sm³', unitPlural: 'Sm³', unitLong: 'Schüttkubikmeter', price: 45, step: 1 },
   { id: 'bergschotter', group: 'Schüttgut', name: 'Bergschotter', detail: 'für Wege und Plätze', unit: 'm³', unitPlural: 'm³', unitLong: 'Kubikmeter', price: 75, step: 1 },
 ];
 

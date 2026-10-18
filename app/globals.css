@@ -2395,8 +2395,28 @@ html.has-motion .curtain--intro .curtain__logo {
   align-items: center;
   padding: 14px 20px;
 }
-.prod .qty {
+.prod .qty,
+.prod__qtys {
   justify-self: start;
+}
+.prod__qtys {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+}
+.prod.prod--len {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px 16px;
+}
+.prod__times {
+  font: 500 18px/1 var(--font-ui);
+  color: var(--text-muted);
+}
+.prod__lm {
+  font: 400 14px/1 var(--font-serif);
+  color: var(--text-muted);
+  white-space: nowrap;
 }
 /* Wenig Platz (Handy oder neben der Übersicht): Produktzeile zweizeilig */
 @container order-main (max-width: 640px) {

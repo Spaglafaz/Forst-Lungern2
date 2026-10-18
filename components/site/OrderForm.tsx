@@ -21,17 +21,18 @@ import { Button } from '../ds/Button';
 import { Icon } from '../ds/Icon';
 import { IconBadge } from '../ds/IconBadge';
 import { TLink } from '../motion/TLink';
+import { LocationPicker, fmtPos, type LatLng } from './LocationPicker';
 import { gsap, useGSAP, ScrollSmoother, ScrollTrigger, motionEnabled } from '../motion/gsap';
 
 /* ===== Datenmodell ===== */
 
 type WoodLine = { key: string; wood: string; length: FirewoodLength; fine: boolean; qty: number };
 type Mode = 'abholung' | 'lieferung';
-type Contact = { name: string; tel: string; email: string; strasse: string; ort: string; termin: string; msg: string; hp: string };
+type Contact = { name: string; tel: string; email: string; strasse: string; ort: string; pos: LatLng | null; termin: string; msg: string; hp: string };
 type Line = { id: string; title: string; detail: string; qty: number; unit: string; unitPrice: number; amount: number; remove: () => void };
 
-const EMPTY_CONTACT: Contact = { name: '', tel: '', email: '', strasse: '', ort: '', termin: '', msg: '', hp: '' };
-const STORE_KEY = 'fl-bestellung-v1';
+const EMPTY_CONTACT: Contact = { name: '', tel: '', email: '', strasse: '', ort: '', pos: null, termin: '', msg: '', hp: '' };
+const STORE_KEY = 'fl-bestellung-v2';
 const STER_STEP = 0.5;
 
 let keySeq = 0;
@@ -54,6 +55,7 @@ const parseQty = (s: string) => {
   const n = parseFloat(s.replace(',', '.'));
   return Number.isFinite(n) && n > 0 ? n : 0;
 };
+const mapsLink = (p: LatLng) => `https://www.google.com/maps?q=${p.lat.toFixed(6)},${p.lng.toFixed(6)}`;
 const emailOk = (s: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s.trim());
 
 /** Weich zu einem Element scrollen – auch mit ScrollSmoother. */
@@ -174,6 +176,9 @@ function StepHead({ n, title, text }: { n: string; title: string; text?: string 
 export function OrderForm() {
   const [wood, setWood] = useState<WoodLine[]>(initialWood);
   const [items, setItems] = useState<Record<string, number>>({});
+  /** Länge pro Stück (m) bei Produkten mit Laufmeterpreis */
+  const [lens, setLens] = useState<Record<string, number>>({});
+  const lenOf = (p: (typeof PRODUCTS)[number]) => lens[p.id] ?? p.perLength?.default ?? 1;
   const [mode, setMode] = useState<Mode>('abholung');
   const [c, setC] = useState<Contact>(EMPTY_CONTACT);
   const [tried, setTried] = useState(false);
@@ -196,6 +201,7 @@ export function OrderForm() {
         const d = JSON.parse(raw);
         if (Array.isArray(d.wood) && d.wood.length) setWood(d.wood);
         if (d.items && typeof d.items === 'object') setItems(d.items);
+        if (d.lens && typeof d.lens === 'object') setLens(d.lens);
         if (d.mode === 'lieferung' || d.mode === 'abholung') setMode(d.mode);
       }
     } catch {}
@@ -204,9 +210,9 @@ export function OrderForm() {
   useEffect(() => {
     if (!hydrated) return;
     try {
-      localStorage.setItem(STORE_KEY, JSON.stringify({ wood, items, mode }));
+      localStorage.setItem(STORE_KEY, JSON.stringify({ wood, items, lens, mode }));
     } catch {}
-  }, [wood, items, mode, hydrated]);
+  }, [wood, items, lens, mode, hydrated]);
 
   /* ----- Berechnung ----- */
   const calc = useMemo(() => {
@@ -228,14 +234,15 @@ export function OrderForm() {
     PRODUCTS.forEach((p) => {
       const q = items[p.id] ?? 0;
       if (q <= 0) return;
+      const len = p.perLength ? lenOf(p) : 1;
       lines.push({
         id: p.id,
         title: p.name,
-        detail: p.detail,
+        detail: p.perLength ? [p.detail, `je ${fmtQty(len)} m`, `total ${fmtQty(q * len)} lm`].filter(Boolean).join(', ') : p.detail,
         qty: q,
         unit: q === 1 ? p.unit : p.unitPlural,
-        unitPrice: p.price,
-        amount: p.price * q,
+        unitPrice: p.price * len,
+        amount: p.price * len * q,
         remove: () => setItems((it) => ({ ...it, [p.id]: 0 })),
       });
     });
@@ -248,7 +255,8 @@ export function OrderForm() {
     const mwst = subtotal * MWST_RATE;
     const total = round05(subtotal + mwst);
     return { lines, ster, otherItems, deliveryRate, delivery, goods, subtotal, mwst, total };
-  }, [wood, items, mode]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [wood, items, lens, mode]);
 
   /* ----- Prüfung ----- */
   const errors = useMemo(() => {
@@ -295,7 +303,7 @@ export function OrderForm() {
 
   /* ----- Texte für E-Mail ----- */
   const orderText = () => {
-    const rows = calc.lines.map((l) => `• ${fmtQty(l.qty)} ${l.unit} ${l.title} (${l.detail}) à ${chf(l.unitPrice)} = ${chf(l.amount)}`);
+    const rows = calc.lines.map((l) => `• ${fmtQty(l.qty)} ${l.unit} ${l.title}${l.detail ? ` (${l.detail})` : ''} à ${chf(l.unitPrice)} = ${chf(l.amount)}`);
     if (mode === 'lieferung' && calc.ster > 0) rows.push(`• Lieferung ${fmtQty(calc.ster)} Ster à ${chf(calc.deliveryRate)} = ${chf(calc.delivery)}`);
     if (mode === 'lieferung' && calc.otherItems) rows.push('• Lieferung übrige Produkte: nach Absprache');
     rows.push('', `Zwischensumme exkl. MWST: ${chf(calc.subtotal)}`, `MWST ${(MWST_RATE * 100).toFixed(1)} %: ${chf(calc.mwst)}`, `Total inkl. MWST: ${chf(calc.total)}`);
@@ -311,8 +319,9 @@ export function OrderForm() {
       orderText(),
       '',
       `Lieferart: ${mode === 'lieferung' ? 'Lieferung' : 'Selbstabholung im Forstwerkhof'}`,
+      mode === 'lieferung' && c.pos ? `Abladeort (Karte): ${fmtPos(c.pos)} – ${mapsLink(c.pos)}` : null,
       `Wunschtermin: ${c.termin.trim() || '–'}`,
-      c.msg.trim() ? `Bemerkungen: ${c.msg.trim()}` : '',
+      c.msg.trim() ? `Bemerkungen: ${c.msg.trim()}` : null,
       '',
       'Freundliche Grüsse',
       c.name.trim(),
@@ -320,7 +329,7 @@ export function OrderForm() {
       c.tel.trim(),
       c.email.trim(),
     ]
-      .filter((l, i, a) => !(l === '' && a[i - 1] === ''))
+      .filter((l): l is string => l !== null)
       .join('\n');
     return `${CONTACT.personMail}?subject=${encodeURIComponent('Bestellung Holzprodukte – ' + c.name.trim())}&body=${encodeURIComponent(body)}`;
   };
@@ -355,6 +364,7 @@ export function OrderForm() {
     data.append('Telefon', c.tel.trim());
     data.append('E-Mail', c.email.trim());
     data.append(mode === 'lieferung' ? 'Lieferadresse' : 'Adresse', addressText());
+    if (mode === 'lieferung') data.append('Abladeort (Karte)', c.pos ? `${fmtPos(c.pos)} – ${mapsLink(c.pos)}` : '–');
     data.append('Wunschtermin', c.termin.trim() || '–');
     data.append('Bemerkungen', c.msg.trim() || '–');
     data.append('Total inkl. MWST', chf(calc.total));
@@ -376,6 +386,7 @@ export function OrderForm() {
     setSent({ lines: calc.lines, total: calc.total, mode, delivery: calc.delivery });
     setWood(initialWood());
     setItems({});
+    setLens({});
     setTried(false);
     requestAnimationFrame(() => scrollToEl(rootRef.current, 'top 130px'));
   };
@@ -587,18 +598,36 @@ export function OrderForm() {
                   <div className="order-list">
                     {PRODUCTS.filter((p) => p.group === g).map((p) => {
                       const q = items[p.id] ?? 0;
+                      const len = p.perLength ? lenOf(p) : 1;
                       return (
-                        <div key={p.id} className={'prod' + (q > 0 ? ' is-active' : '')}>
+                        <div key={p.id} className={'prod' + (p.perLength ? ' prod--len' : '') + (q > 0 ? ' is-active' : '')}>
                           <div className="prod__info">
                             <div className="prod__name">{p.name}</div>
-                            <div className="prod__detail">{p.detail}</div>
+                            {p.detail && <div className="prod__detail">{p.detail}</div>}
                           </div>
                           <div className="prod__price">
                             {chf(p.price)}
                             <small>pro {p.unitLong}</small>
                           </div>
-                          <QtyStepper value={q} step={p.step} unit={p.unit} label={`${p.name} ${p.detail}`} onChange={(n) => setItems((it) => ({ ...it, [p.id]: n }))} />
-                          <span className={'line-total' + (q > 0 ? ' is-on' : '')}>{q > 0 ? chf(p.price * q) : '–'}</span>
+                          {p.perLength ? (
+                            <div className="prod__qtys">
+                              <QtyStepper value={q} step={p.step} unit={p.unit} label={`${p.name}: Stückzahl`} onChange={(n) => setItems((it) => ({ ...it, [p.id]: n }))} />
+                              <span className="prod__times" aria-hidden>
+                                ×
+                              </span>
+                              <QtyStepper
+                                value={len}
+                                step={p.perLength.step}
+                                unit="m"
+                                label={`${p.name}: Länge pro Stück`}
+                                onChange={(n) => setLens((l) => ({ ...l, [p.id]: n || p.perLength!.step }))}
+                              />
+                              {q > 0 && <span className="prod__lm">= {fmtQty(q * len)} lm</span>}
+                            </div>
+                          ) : (
+                            <QtyStepper value={q} step={p.step} unit={p.unit} label={`${p.name} ${p.detail}`} onChange={(n) => setItems((it) => ({ ...it, [p.id]: n }))} />
+                          )}
+                          <span className={'line-total' + (q > 0 ? ' is-on' : '')}>{q > 0 ? chf(p.price * len * q) : '–'}</span>
                         </div>
                       );
                     })}
@@ -677,6 +706,12 @@ export function OrderForm() {
                     <input value={c.ort} onChange={(e) => setField('ort', e.target.value)} autoComplete="address-level2" placeholder="z.B. 6078 Lungern" aria-invalid={!!err('ort')} />
                   </Field>
                 </div>
+                {mode === 'lieferung' && (
+                  <div>
+                    <div className="field-label">Liefer- bzw. Abladeort auf der Karte (optional)</div>
+                    <LocationPicker value={c.pos} onChange={(p) => setField('pos', p)} />
+                  </div>
+                )}
                 <Field label="Wunschtermin" hint="z.B. «ab Mitte November» oder «Samstagvormittag» – wir bestätigen telefonisch">
                   <input value={c.termin} onChange={(e) => setField('termin', e.target.value)} />
                 </Field>
@@ -726,7 +761,7 @@ export function OrderForm() {
                           {fmtQty(l.qty)} {l.unit} {l.title}
                         </div>
                         <div className="summary__detail">
-                          {l.detail} · à {chf(l.unitPrice)}
+                          {[l.detail, 'à ' + chf(l.unitPrice) + (l.unit.startsWith('Stk') ? ' pro Stk.' : '')].filter(Boolean).join(' · ')}
                         </div>
                       </div>
                       <span className="summary__amount">{chf(l.amount)}</span>
