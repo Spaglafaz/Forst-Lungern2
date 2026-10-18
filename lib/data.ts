@@ -122,7 +122,9 @@ export const SERVICES: Service[] = [
 /* ===== Holzprodukte (gemäss «Preisliste Holzschopf», gültig ab 1. Januar 2026, Preise exkl. MWST) ===== */
 
 /** Preisliste als PDF zum Herunterladen (liegt in public/assets/docs/). */
-export const PRICE_LIST_PDF = asset('/assets/docs/Preisliste-Holzprodukte-2026.pdf');
+export const PRICE_LIST_PDF = asset('/assets/docs/Preisliste-Holzsortiment-2026.pdf');
+/** Vorgeschlagener Dateiname beim Herunterladen */
+export const PRICE_LIST_FILE = 'Preisliste-Holzsortiment-2026-Forst-Lungern.pdf';
 export const PRICE_LIST_LABEL = 'Preisliste 2026 (PDF)';
 export const PRICE_LIST_VALID = 'gültig ab 1. Januar 2026';
 /** MWST-Satz Schweiz (Normalsatz). Alle Preise der Liste verstehen sich exkl. MWST. */

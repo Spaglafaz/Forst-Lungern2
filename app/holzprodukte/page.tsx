@@ -3,7 +3,7 @@ import { PageHero } from '@/components/site/PageHero';
 import { OrderForm } from '@/components/site/OrderForm';
 import { Button } from '@/components/ds/Button';
 import { SectionHeading } from '@/components/ds/SectionHeading';
-import { CONTACT, DELIVERY, HEROES, PRICE_LIST_LABEL, PRICE_LIST_PDF, PRICE_LIST_VALID, chf } from '@/lib/data';
+import { CONTACT, DELIVERY, HEROES, PRICE_LIST_FILE, PRICE_LIST_LABEL, PRICE_LIST_PDF, PRICE_LIST_VALID, chf } from '@/lib/data';
 
 export const metadata: Metadata = { title: 'Holzprodukte', description: HEROES.produkte.text };
 
@@ -36,7 +36,7 @@ export default function HolzproduktePage() {
                 ))}
               </ol>
               <div style={{ marginTop: 22 }}>
-                <Button size="sm" variant="outline" icon="download" href={PRICE_LIST_PDF} download="Preisliste-Forst-Lungern-2026.pdf">
+                <Button size="sm" variant="outline" icon="download" href={PRICE_LIST_PDF} download={PRICE_LIST_FILE}>
                   {PRICE_LIST_LABEL}
                 </Button>
               </div>

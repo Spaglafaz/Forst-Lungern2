@@ -10,6 +10,7 @@ import {
   FORM_ENDPOINT,
   MWST_RATE,
   PRICE_LIST_LABEL,
+  PRICE_LIST_FILE,
   PRICE_LIST_PDF,
   PRODUCTS,
   SPLIT_FINE_SURCHARGE,
@@ -319,7 +320,7 @@ export function OrderForm() {
       orderText(),
       '',
       `Lieferart: ${mode === 'lieferung' ? 'Lieferung' : 'Selbstabholung im Forstwerkhof'}`,
-      c.pos ? `Abladeort (Karte): ${fmtPos(c.pos)} – ${mapsLink(c.pos)}` : null,
+      mode === 'lieferung' && c.pos ? `Abladeort (Karte): ${fmtPos(c.pos)} – ${mapsLink(c.pos)}` : null,
       `Wunschtermin: ${c.termin.trim() || '–'}`,
       c.msg.trim() ? `Bemerkungen: ${c.msg.trim()}` : null,
       '',
@@ -364,7 +365,7 @@ export function OrderForm() {
     data.append('Telefon', c.tel.trim());
     data.append('E-Mail', c.email.trim());
     data.append(mode === 'lieferung' ? 'Lieferadresse' : 'Adresse', addressText());
-    data.append('Abladeort (Karte)', c.pos ? `${fmtPos(c.pos)} – ${mapsLink(c.pos)}` : '–');
+    if (mode === 'lieferung') data.append('Abladeort (Karte)', c.pos ? `${fmtPos(c.pos)} – ${mapsLink(c.pos)}` : '–');
     data.append('Wunschtermin', c.termin.trim() || '–');
     data.append('Bemerkungen', c.msg.trim() || '–');
     data.append('Total inkl. MWST', chf(calc.total));
@@ -638,7 +639,7 @@ export function OrderForm() {
                 <Icon name="info" size={16} />
                 <span>
                   Alle Preise in CHF exkl. MWST, gemäss{' '}
-                  <a href={PRICE_LIST_PDF} download="Preisliste-Forst-Lungern-2026.pdf">
+                  <a href={PRICE_LIST_PDF} download={PRICE_LIST_FILE}>
                     Preisliste 2026
                   </a>
                   . Die MWST wird in der Übersicht ausgewiesen.
@@ -706,10 +707,12 @@ export function OrderForm() {
                     <input value={c.ort} onChange={(e) => setField('ort', e.target.value)} autoComplete="address-level2" placeholder="z.B. 6078 Lungern" aria-invalid={!!err('ort')} />
                   </Field>
                 </div>
-                <div>
-                  <div className="field-label">Liefer- bzw. Abladeort auf der Karte (optional)</div>
-                  <LocationPicker value={c.pos} onChange={(p) => setField('pos', p)} />
-                </div>
+                {mode === 'lieferung' && (
+                  <div>
+                    <div className="field-label">Liefer- bzw. Abladeort auf der Karte (optional)</div>
+                    <LocationPicker value={c.pos} onChange={(p) => setField('pos', p)} />
+                  </div>
+                )}
                 <Field label="Wunschtermin" hint="z.B. «ab Mitte November» oder «Samstagvormittag» – wir bestätigen telefonisch">
                   <input value={c.termin} onChange={(e) => setField('termin', e.target.value)} />
                 </Field>
@@ -831,7 +834,7 @@ export function OrderForm() {
                 Die Bestellung geht direkt an Armin Imfeld und wird mit seiner Bestätigung verbindlich.{' '}
                 <TLink href="/datenschutz">Datenschutz</TLink>
               </p>
-              <a className="summary__pdf" href={PRICE_LIST_PDF} download="Preisliste-Forst-Lungern-2026.pdf">
+              <a className="summary__pdf" href={PRICE_LIST_PDF} download={PRICE_LIST_FILE}>
                 <Icon name="file-text" size={18} />
                 <span>
                   {PRICE_LIST_LABEL}
