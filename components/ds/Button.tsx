@@ -17,11 +17,15 @@ type Props = {
   type?: 'button' | 'submit';
   fullWidth?: boolean;
   className?: string;
+  /** Datei herunterladen statt navigieren (z.B. PDF); Wert = vorgeschlagener Dateiname */
+  download?: string;
+  /** Element deaktivieren (nur Buttons) */
+  disabled?: boolean;
 };
 
 const SIZES = { sm: 11, md: 12, lg: 13 };
 
-export function Button({ children, variant = 'primary', size = 'md', arrow, icon, href, onClick, type = 'button', fullWidth, className }: Props) {
+export function Button({ children, variant = 'primary', size = 'md', arrow, icon, href, onClick, type = 'button', fullWidth, className, download, disabled }: Props) {
   const ref = useRef<HTMLElement>(null);
   const fs = SIZES[size];
 
@@ -77,6 +81,13 @@ export function Button({ children, variant = 'primary', size = 'md', arrow, icon
   );
 
   if (href) {
+    if (download) {
+      return (
+        <a ref={ref as React.Ref<HTMLAnchorElement>} href={href} className={cls} onClick={onClick} download={download}>
+          {content}
+        </a>
+      );
+    }
     if (href.startsWith('/')) {
       return (
         <TLink ref={ref as React.Ref<HTMLAnchorElement>} href={href} className={cls} onClick={onClick}>
@@ -99,7 +110,7 @@ export function Button({ children, variant = 'primary', size = 'md', arrow, icon
     );
   }
   return (
-    <button ref={ref as React.Ref<HTMLButtonElement>} type={type} className={cls} onClick={onClick}>
+    <button ref={ref as React.Ref<HTMLButtonElement>} type={type} className={cls} onClick={onClick} disabled={disabled}>
       {content}
     </button>
   );

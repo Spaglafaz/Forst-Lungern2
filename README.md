@@ -30,7 +30,7 @@ unter `https://<konto>.github.io/<repo-name>/` ausliefert. Bei einer eigenen Dom
 | `/ueber-uns` | Über uns, Geschichte, Team, Ausbildung, Werte |
 | `/leistungen` | Übersicht der 5 Bereiche |
 | `/leistungen/[slug]` | Detailseite je Leistung (statisch generiert) |
-| `/holzprodukte` | Sortiment mit Anfrage-Links |
+| `/holzprodukte` | Sortiment mit Bestellformular (Mengen, Preisberechnung, Lieferung/Abholung) und Preisliste als PDF |
 | `/maschinen` | Maschinenpark |
 | `/jobs` | Stellen, Lehre, Schnupperlehre |
 | `/kontakt` | Kontakt + Formular (Vorbelegung im Browser über `?anliegen=…&nachricht=…`) |
@@ -38,7 +38,7 @@ unter `https://<konto>.github.io/<repo-name>/` ausliefert. Bei einer eigenen Dom
 
 ## Aufbau
 
-- `lib/data.ts` – alle Inhalte (Leistungen, Produkte, Maschinen, Meilensteine, Heros, Kontaktdaten). `SHOW_PRICES` blendet Preise ein/aus.
+- `lib/data.ts` – alle Inhalte (Leistungen, Produkte, Maschinen, Meilensteine, Heros, Kontaktdaten). Holzprodukte: `FIREWOOD`, `FIREWOOD_LENGTHS`, `PRODUCTS`, `DELIVERY`, `MWST_RATE` – Preise gemäss Preisliste; die PDF liegt in `public/assets/docs/` (`PRICE_LIST_PDF`).
 - `app/tokens.css` – Design-Tokens aus dem Designsystem (Farben, Typo, Abstände, Effekte).
 - `app/globals.css` – Komponenten-Styles und CSS-Mikroanimationen.
 - `components/ds/` – Designsystem-Komponenten (Button, ArrowRule, SectionHeading, PhotoCard, PolaroidStack …).
@@ -69,6 +69,7 @@ Bei «Bewegung reduzieren» (prefers-reduced-motion) werden alle Animationen und
 ## Offene Punkte
 
 - **Formularversand**: läuft über FormSubmit (`FORM_ENDPOINT` in `lib/data.ts`) an armin.imfeld@forst-lungern.ch. Die erste Anfrage löst eine Bestätigungs-Mail aus, die einmal mit «Activate» bestätigt werden muss. Danach die E-Mail-Adresse im Endpunkt durch die zugeschickte Zufallszeichenfolge ersetzen (schützt vor Spam).
+- **Holzprodukte-Bestellung**: wird wie das Kontaktformular über FormSubmit an Armin Imfeld gesendet; alternativ öffnet der Link «mit eigenem E-Mail-Programm» eine fertige E-Mail. Bei neuer Preisliste PDF ersetzen und Preise in `lib/data.ts` nachführen.
 - **Fotos fehlen noch** für Produkte, drei Maschinen (Unitrac, MB Trac, Kramer) und das Kartenbild – dort stehen Platzhalter (`ImageSlot`).
 - **Logo**: `logo-white.png` / `logo-dark.png` wurden automatisch aus `logo.png` freigestellt. Eine Vektor-Version (SVG) wäre besser.
-- Preise sind Platzhalter (siehe Hinweis auf der Produktseite), Datenschutztext ist ein Entwurf.
+- Datenschutztext ist ein Entwurf.

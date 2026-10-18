@@ -1,63 +1,49 @@
 import type { Metadata } from 'next';
 import { PageHero } from '@/components/site/PageHero';
+import { OrderForm } from '@/components/site/OrderForm';
 import { Button } from '@/components/ds/Button';
 import { SectionHeading } from '@/components/ds/SectionHeading';
-import { ImageSlot } from '@/components/ds/ImageSlot';
-import { CONTACT, HEROES, PRODUCTS, SHOW_PRICES, kontaktHref } from '@/lib/data';
+import { CONTACT, DELIVERY, HEROES, PRICE_LIST_LABEL, PRICE_LIST_PDF, PRICE_LIST_VALID, chf } from '@/lib/data';
 
 export const metadata: Metadata = { title: 'Holzprodukte', description: HEROES.produkte.text };
 
+const STEPS = [
+  { n: '01', title: 'Produkte wählen', text: 'Menge eingeben, Länge wählen – der Preis rechnet sich selbst.' },
+  { n: '02', title: 'Lieferung oder Abholung', text: 'Wir liefern in Lungern oder Sie holen im Forstwerkhof ab.' },
+  { n: '03', title: 'Bestellung senden', text: 'Armin Imfeld bestätigt Menge, Preis und Termin persönlich.' },
+];
+
 export default function HolzproduktePage() {
   const h = HEROES.produkte;
-  const priceNote = SHOW_PRICES
-    ? 'Richtpreise ab Werkhof, Änderungen vorbehalten. Alle Preise sind Platzhalter und noch nicht verbindlich.'
-    : 'Preise auf Anfrage.';
   return (
     <main>
       <PageHero image={h.image} pos={h.pos} eyebrow={h.eyebrow} title={h.title} text={h.text} />
 
-      <section className="section">
+      <section className="section" id="bestellen">
         <div className="container">
           <div data-reveal="" className="split split--end">
-            <SectionHeading title="Unser Sortiment" subtitle="Anfragen statt bestellen – wir melden uns" />
+            <SectionHeading title="Sortiment & Bestellung" subtitle={'Preise ' + PRICE_LIST_VALID + ', exkl. MWST'} />
             <div>
-              <p style={{ margin: 0, maxWidth: '62ch' }}>
-                Kein Onlineshop: Wählen Sie ein Produkt und fragen Sie an – per Formular oder WhatsApp. Abholung im Forstwerkhof oder Lieferung nach telefonischer
-                Absprache.
-              </p>
-              <p style={{ margin: '12px 0 0', fontSize: 15, color: 'var(--text-muted)' }}>{priceNote}</p>
+              <ol className="order-steps">
+                {STEPS.map((s) => (
+                  <li key={s.n}>
+                    <span className="order-steps__num">{s.n}</span>
+                    <span>
+                      <strong>{s.title}</strong>
+                      {s.text}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+              <div style={{ marginTop: 22 }}>
+                <Button size="sm" variant="outline" icon="download" href={PRICE_LIST_PDF} download="Preisliste-Forst-Lungern-2026.pdf">
+                  {PRICE_LIST_LABEL}
+                </Button>
+              </div>
             </div>
           </div>
-          <div className="grid-cards" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,270px),1fr))' }}>
-            {PRODUCTS.map((p) => (
-              <article key={p.id} data-reveal="" className="card" style={{ display: 'flex', flexDirection: 'column' }}>
-                <div className="card__media">
-                  <ImageSlot label={'Foto ' + p.name} />
-                </div>
-                <div style={{ padding: '20px 22px 24px', display: 'flex', flexDirection: 'column', gap: 6, flex: 1 }}>
-                  <div className="card__kind">{p.einheit}</div>
-                  <h3 className="card__title" style={{ marginTop: 0 }}>
-                    {p.name}
-                  </h3>
-                  <p className="card__text" style={{ marginTop: 0 }}>
-                    {p.ausfuehrung}
-                  </p>
-                  <div style={{ marginTop: 'auto', paddingTop: 14, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
-                    <span className="price">{SHOW_PRICES ? p.price : 'Preis auf Anfrage'}</span>
-                    <Button
-                      size="sm"
-                      arrow
-                      href={kontaktHref(
-                        'Holzprodukte',
-                        'Anfrage: ' + p.name + ' (' + p.ausfuehrung + '), Einheit: ' + p.einheit + '. Gewünschte Menge: ',
-                      )}
-                    >
-                      Anfragen
-                    </Button>
-                  </div>
-                </div>
-              </article>
-            ))}
+          <div style={{ marginTop: 56 }}>
+            <OrderForm />
           </div>
         </div>
       </section>
@@ -79,9 +65,10 @@ export default function HolzproduktePage() {
             </div>
           </div>
           <div data-reveal="">
-            <SectionHeading title="Lieferung" subtitle="In der Gemeinde Lungern" />
+            <SectionHeading title="Lieferung" subtitle={'In der ' + DELIVERY.area} />
             <p style={{ margin: '22px 0 0', maxWidth: '62ch' }}>
-              Wir liefern in der Gemeinde Lungern pauschal ab CHF 20.–. Lieferungen in die Region und Mindestmengen auf Anfrage.
+              Brennholz liefern wir für {chf(DELIVERY.perSter)} pro Ster, ab {DELIVERY.reducedFrom} Ster für {chf(DELIVERY.perSterReduced)} pro Ster. Lieferungen in
+              die Region und für übrige Produkte auf Anfrage.
             </p>
           </div>
           <div data-reveal="">

@@ -21,9 +21,6 @@ export const CONTACT = {
   mapsSwisstopo: 'https://s.geo.admin.ch/gc1en7gwlxcf',
 };
 
-/** Richtpreise anzeigen (entspricht der Option «showPrices» im Entwurf). */
-export const SHOW_PRICES = true;
-
 export type NavItem = { href: string; label: string };
 
 export const NAV: NavItem[] = [
@@ -122,21 +119,70 @@ export const SERVICES: Service[] = [
   },
 ];
 
-export type Product = { id: string; name: string; ausfuehrung: string; einheit: string; price: string };
+/* ===== Holzprodukte (gemäss «Preisliste Holzschopf», gültig ab 1. Januar 2026, Preise exkl. MWST) ===== */
+
+/** Preisliste als PDF zum Herunterladen (liegt in public/assets/docs/). */
+export const PRICE_LIST_PDF = asset('/assets/docs/Preisliste-Holzprodukte-2026.pdf');
+export const PRICE_LIST_LABEL = 'Preisliste 2026 (PDF)';
+export const PRICE_LIST_VALID = 'gültig ab 1. Januar 2026';
+/** MWST-Satz Schweiz (Normalsatz). Alle Preise der Liste verstehen sich exkl. MWST. */
+export const MWST_RATE = 0.081;
+
+/** Brennholz: Grundpreis pro Ster (Meterholz, 1 m), Zuschläge für Fräsen und Spalten. */
+export type Firewood = { id: string; name: string; detail: string; pricePerSter: number };
+export const FIREWOOD: Firewood[] = [
+  { id: 'buche', name: 'Buche Brennholz', detail: 'trocken, Hartholz mit langer Glut', pricePerSter: 120 },
+  { id: 'nadel', name: 'Nadelholz Brennholz', detail: 'trocken, brennt schnell und heiss', pricePerSter: 110 },
+];
+
+/** Schnittlänge: 1 m = Meterholz ohne Zuschlag, kürzer = gefräst (Zuschlag pro Ster). */
+export const FIREWOOD_LENGTHS = [
+  { id: '100', label: '1 m', detail: 'Meterholz', surcharge: 0 },
+  { id: '50', label: '50 cm', detail: 'Fräsen 1×', surcharge: 17 },
+  { id: '33', label: '33 cm', detail: 'Fräsen 2×', surcharge: 22 },
+  { id: '25', label: '25 cm', detail: 'Fräsen 3×', surcharge: 32 },
+] as const;
+export type FirewoodLength = (typeof FIREWOOD_LENGTHS)[number]['id'];
+
+/** Zuschlag «Spalten fein» pro Ster (nur bei gefrästem Holz). */
+export const SPLIT_FINE_SURCHARGE = 25;
+
+/** Lieferung von Brennholz: Preis pro Ster, ab einer Mindestmenge günstiger. */
+export const DELIVERY = { perSter: 30, perSterReduced: 20, reducedFrom: 2, area: 'Gemeinde Lungern' };
+
+/** Übrige Produkte mit festem Stückpreis. */
+export type Product = {
+  id: string;
+  group: string;
+  name: string;
+  detail: string;
+  /** Einheit kurz (z.B. «Sack»), Mehrzahl und ausgeschrieben */
+  unit: string;
+  unitPlural: string;
+  unitLong: string;
+  price: number;
+  /** Schrittweite im Mengenfeld */
+  step: number;
+};
 
 export const PRODUCTS: Product[] = [
-  { id: 'buche-sack', name: 'Brennholz Buche', ausfuehrung: 'gespalten, 25 / 33 cm', einheit: 'Sack ca. 40 l', price: 'CHF 12.–' },
-  { id: 'buche-ster', name: 'Brennholz Buche', ausfuehrung: 'gespalten, 25 / 33 / 50 cm', einheit: 'Ster', price: 'CHF 160.–' },
-  { id: 'nadel-ster', name: 'Brennholz Nadelholz', ausfuehrung: 'gespalten, 25 / 33 / 50 cm', einheit: 'Ster', price: 'CHF 120.–' },
-  { id: 'meterholz', name: 'Meterholz Buche', ausfuehrung: '1 m, gespalten', einheit: 'Ster', price: 'CHF 120.–' },
-  { id: 'anfeuerholz', name: 'Anfeuerholz', ausfuehrung: 'Nadelholz, fein gespalten', einheit: 'Sack ca. 20 l', price: 'CHF 10.–' },
-  { id: 'finnenkerze', name: 'Finnenkerze', ausfuehrung: 'ca. 50 cm, Nadelholz', einheit: 'Stück', price: 'CHF 15.–' },
-  { id: 'schnitzel', name: 'Holzschnitzel', ausfuehrung: 'Hackschnitzel für Heizungen', einheit: 'Sm³ (Schüttkubikmeter)', price: 'CHF 50.–' },
-  { id: 'rindenmulch', name: 'Rindenmulch', ausfuehrung: 'für Garten und Beete', einheit: 'Sm³', price: 'CHF 45.–' },
-  { id: 'pfosten-15', name: 'Zaunpfosten Lärche', ausfuehrung: 'gespitzt, 1.5 m', einheit: 'Stück', price: 'CHF 9.–' },
-  { id: 'pfosten-20', name: 'Zaunpfosten Lärche', ausfuehrung: 'gespitzt, 2.0 m', einheit: 'Stück', price: 'CHF 12.–' },
-  { id: 'lieferung', name: 'Lieferung', ausfuehrung: 'Gemeinde Lungern', einheit: 'pauschal', price: 'ab CHF 20.–' },
+  { id: 'sack-25', group: 'Brennholz im Sack', name: 'Buche Brennholz', detail: 'trocken, 25 cm', unit: 'Sack', unitPlural: 'Säcke', unitLong: 'Sack', price: 13, step: 1 },
+  { id: 'sack-33', group: 'Brennholz im Sack', name: 'Buche Brennholz', detail: 'trocken, 33 cm', unit: 'Sack', unitPlural: 'Säcke', unitLong: 'Sack', price: 13, step: 1 },
+  { id: 'latten', group: 'Latten & Pfähle', name: 'Latten rund', detail: 'entrindet', unit: 'lm', unitPlural: 'lm', unitLong: 'Laufmeter', price: 5, step: 1 },
+  { id: 'zaunpfahl', group: 'Latten & Pfähle', name: 'Zaunpfähle', detail: 'Länge 1.6 m', unit: 'Stk.', unitPlural: 'Stk.', unitLong: 'Stück', price: 5.2, step: 1 },
+  { id: 'pfahl', group: 'Latten & Pfähle', name: 'Pfähle', detail: 'Länge 1 m', unit: 'Stk.', unitPlural: 'Stk.', unitLong: 'Stück', price: 4, step: 1 },
+  { id: 'hackschnitzel', group: 'Schüttgut', name: 'Hackschnitzel', detail: 'für Schnitzelheizungen', unit: 'Sm³', unitPlural: 'Sm³', unitLong: 'Schüttkubikmeter', price: 45, step: 1 },
+  { id: 'bergschotter', group: 'Schüttgut', name: 'Bergschotter', detail: 'für Wege und Plätze', unit: 'm³', unitPlural: 'm³', unitLong: 'Kubikmeter', price: 75, step: 1 },
 ];
+
+/** Betrag in Franken, Schweizer Schreibweise: CHF 1'234.50 */
+export function chf(n: number) {
+  const [int, dec] = (Math.round(n * 100) / 100).toFixed(2).split('.');
+  return 'CHF ' + int.replace(/\B(?=(\d{3})+(?!\d))/g, "'") + '.' + dec;
+}
+
+/** Auf 5 Rappen runden (Schweizer Rundung für Endbeträge). */
+export const round05 = (n: number) => Math.round(n * 20) / 20;
 
 export type Machine = { id: string; name: string; kind: string; use: string; image?: string; pos?: string; placeholder?: string };
 
@@ -241,7 +287,7 @@ export type Hero = { image: string; pos: string; eyebrow: string; title: string;
 export const HEROES: Record<string, Hero> = {
   ueber: { image: PH + 'seilkran-tal-panorama.jpg', pos: 'center 52%', eyebrow: 'Über uns', title: 'Ein Betrieb für den Lungerer Wald', text: 'Die Forst Lungern AG führt die Forstbetriebe der Teilsamen Lungern-Dorf und Lungern-Obsee seit dem 1. März 2026 gemeinsam.' },
   leistungen: { image: PH + 'seilbahn-tal.jpg', pos: 'center 45%', eyebrow: 'Leistungen', title: 'Was wir für Sie tun', text: 'Fünf Bereiche – vom Schutzwald über Verbauungen bis zum Winterdienst.' },
-  produkte: { image: PH + 'rundholz-polter.jpg', pos: 'center 42%', eyebrow: 'Holzprodukte', title: 'Holz aus dem Lungerer Wald', text: 'Brennholz, Schnitzel, Rindenmulch und Lärchenpfosten – Schaufenster mit Anfrage, kein Onlineshop.' },
+  produkte: { image: PH + 'rundholz-polter.jpg', pos: 'center 42%', eyebrow: 'Holzprodukte', title: 'Holz aus dem Lungerer Wald', text: 'Brennholz, Pfähle, Hackschnitzel und Bergschotter – Menge wählen, Preis sehen und direkt bei uns bestellen.' },
   maschinen: { image: PH + 'seilkran-bagger-rundholz.jpg', pos: 'center 72%', eyebrow: 'Maschinenpark', title: 'Für steiles Gelände gebaut', text: 'Seilkran, Forstschlepper, Bagger und Transporter – alle Maschinen sind auf die Forst Lungern AG übergegangen.' },
   jobs: { image: PH + 'holzerei-team-nebel.jpg', pos: 'center 50%', eyebrow: 'Jobs & Lehrstellen', title: 'Arbeiten, wo andere wandern', text: 'Offene Stellen, Lehre Forstwart/in EFZ und Schnupperlehre bei einem anerkannten Lehrbetrieb.' },
   kontakt: { image: PH + 'wegunterhalt-team.jpg', pos: 'center 45%', eyebrow: 'Kontakt', title: 'Wir sind für Sie da', text: 'Telefon, WhatsApp oder Formular – Sie erreichen uns von jeder Seite aus mit einem Klick.' },

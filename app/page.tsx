@@ -139,14 +139,14 @@ export default function HomePage() {
       <section className="section" style={{ overflow: 'hidden' }}>
         <div className="container split">
           <div data-reveal="">
-            <SectionHeading title="Holz aus dem Lungerer Wald" subtitle="Brennholz, Schnitzel und mehr – direkt vom Werkhof" />
+            <SectionHeading title="Holz aus dem Lungerer Wald" subtitle="Brennholz, Pfähle und mehr – direkt vom Werkhof" />
             <p className="body-copy">
-              Ofenfertiges Brennholz aus Buche und Nadelholz, Anfeuerholz, Hackschnitzel für Heizungen, Rindenmulch und Lärchenpfosten für den Zaun.
-              Abholung im Forstwerkhof oder Lieferung nach telefonischer Absprache.
+              Brennholz aus Buche und Nadelholz – als Meterholz, gefräst oder im Sack –, Latten und Pfähle, Hackschnitzel und Bergschotter.
+              Menge wählen, Preis sehen und online bestellen – mit Lieferung oder Abholung im Forstwerkhof.
             </p>
             <div className="btn-row" style={{ marginTop: 34 }}>
               <Button arrow href="/holzprodukte">
-                Sortiment ansehen
+                Sortiment & Bestellung
               </Button>
             </div>
           </div>
