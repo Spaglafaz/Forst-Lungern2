@@ -26,7 +26,7 @@ export default function UeberUnsPage() {
               Teilsamen halten je 50 % der Forst Lungern AG.
             </p>
             <p className="body-copy">
-              Für Kunden bleiben Team, Werkhof Hackern und Ansprechperson gleich. Neu ist die Form: ein Betrieb mit einer Adresse, einer Rechnung und
+              Für Kunden bleiben Team, Forstwerkhof und Ansprechperson gleich. Neu ist die Form: ein Betrieb mit einer Adresse, einer Rechnung und
               einer Nummer.
             </p>
             <dl className="dl-grid">
@@ -35,7 +35,7 @@ export default function UeberUnsPage() {
               <dt>Adresse</dt>
               <dd>Sattelwaldweg 4, 6078 Lungern</dd>
               <dt>Werkhof</dt>
-              <dd>Forstwerkhof Hackern (Nussberg), Lungern</dd>
+              <dd>Forstwerkhof Nussberg, Lungern</dd>
               <dt>Aktionäre</dt>
               <dd>Teilsame Lungern-Dorf 50 % · Teilsame Lungern-Obsee 50 %</dd>
             </dl>
@@ -76,7 +76,7 @@ export default function UeberUnsPage() {
       <section className="section" style={{ paddingBottom: 0 }}>
         <div className="container">
           <div data-reveal="" className="split split--end">
-            <SectionHeading title="Unser Team" subtitle="14 Forstwarte, Maschinisten und Lernende" />
+            <SectionHeading title="Unser Team" subtitle="12 Forstwarte, Maschinisten und Lernende" />
             <p style={{ margin: 0, maxWidth: '62ch' }}>
               Wir kennen die Hänge rund um Lungern seit Jahrzehnten. Im Team arbeiten erfahrene Forstwarte, Maschinisten und Lernende – vom Seilkran bis
               zur Motorsäge alles aus eigener Hand.
@@ -113,7 +113,7 @@ export default function UeberUnsPage() {
               <Image src={asset('/assets/portraits/portrait-armin-about.webp')} alt="Armin Imfeld" fill sizes="180px" style={{ objectFit: 'cover' }} />
             </div>
             <div style={{ gridColumn: 'span 2', minWidth: 0 }}>
-              <div className="eyebrow">Förster und Betriebsleiter</div>
+              <div className="eyebrow">Revierförster und Betriebsleiter</div>
               <h3 style={{ margin: '10px 0 0', font: 'var(--type-h3)', textTransform: 'uppercase', color: 'var(--text-strong)' }}>Armin Imfeld</h3>
               <p style={{ margin: '12px 0 0', maxWidth: '62ch' }}>
                 Förster HF. Seit 1. Oktober 2025 Leiter der Forstbetriebe, seit der Gründung Geschäftsführer der Forst Lungern AG. Er plant die Einsätze,
@@ -139,8 +139,8 @@ export default function UeberUnsPage() {
           <div data-reveal="">
             <SectionHeading title="Ausbildung" subtitle="Anerkannter Lehrbetrieb für Forstwart/in EFZ" />
             <p className="body-copy">
-              Die Ausbildung junger Berufsleute ist uns ein zentrales Anliegen. Lernende arbeiten vom ersten Tag an im Team mit – im Schutzwald, am
-              Seilkran und beim Wegbau.
+              Die Ausbildung junger Berufsleute ist uns ein zentrales Anliegen. Lernende arbeiten vom ersten Tag an in unserem Team – im Schutzwald,
+              am Seilkran und bei weiteren spannenden Projekten.
             </p>
             <div style={{ marginTop: 34 }}>
               <Button arrow href="/jobs">
@@ -160,7 +160,7 @@ export default function UeberUnsPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,280px),1fr))', gap: 48, marginTop: 56 }}>
             <div data-reveal="">
               <FeatureColumn icon="trees" title="Naturnaher Waldbau" subtitle="Standortgerecht und stufig">
-                Wir arbeiten mit der natürlichen Verjüngung, fördern Mischbestände und greifen so ein, dass der Wald stabil bleibt.
+                Wir arbeiten mit der natürlichen Verjüngung, fördern Mischbestände und greifen zielgerecht ein.
               </FeatureColumn>
             </div>
             <div data-reveal="">
@@ -169,8 +169,8 @@ export default function UeberUnsPage() {
               </FeatureColumn>
             </div>
             <div data-reveal="">
-              <FeatureColumn icon="shield-check" title="FSC und NaiS" subtitle="Bewirtschaftung nach anerkannten Grundsätzen">
-                Wir bewirtschaften den Wald nach den Grundsätzen von FSC und nach NaiS (Nachhaltigkeit und Erfolgskontrolle im Schutzwald, BAFU).
+              <FeatureColumn icon="shield-check" title="FSC" subtitle="Bewirtschaftung nach anerkannten Grundsätzen">
+                Wir bewirtschaften den Wald nach den Grundsätzen des FSC (Forest Stewardship Council).
               </FeatureColumn>
             </div>
           </div>

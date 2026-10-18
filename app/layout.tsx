@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.forst-lungern.ch'),
   title: { default: 'Forst Lungern AG – Für einen sicheren und gesunden Wald', template: '%s · Forst Lungern AG' },
   description:
-    'Holzerei, Schutzwaldpflege, Verbauungen, Steinschlagnetze und Winterdienst – aus einer Hand, vom Werkhof Hackern in Lungern OW.',
+    'Holzerei, Schutzwaldpflege, Verbauungen und Winterdienst – aus einer Hand, vom Forstwerkhof Nussberg in Lungern OW.',
   icons: { icon: asset('/assets/logo.png') },
 };
 

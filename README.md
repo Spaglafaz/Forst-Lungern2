@@ -28,7 +28,7 @@ unter `https://<konto>.github.io/<repo-name>/` ausliefert. Bei einer eigenen Dom
 | --- | --- |
 | `/` | Startseite |
 | `/ueber-uns` | Über uns, Geschichte, Team, Ausbildung, Werte |
-| `/leistungen` | Übersicht der 6 Bereiche |
+| `/leistungen` | Übersicht der 5 Bereiche |
 | `/leistungen/[slug]` | Detailseite je Leistung (statisch generiert) |
 | `/holzprodukte` | Sortiment mit Anfrage-Links |
 | `/maschinen` | Maschinenpark |

@@ -118,7 +118,7 @@ export default function JobsPage() {
                 Armin Imfeld
               </div>
               <div style={{ marginTop: 6 }}>
-                Förster und Betriebsleiter · <a href={CONTACT.tel}>{CONTACT.telLabel}</a> · <a href={CONTACT.mail}>{CONTACT.mailLabel}</a>
+                Revierförster und Betriebsleiter · <a href={CONTACT.tel}>{CONTACT.telLabel}</a> · <a href={CONTACT.mail}>{CONTACT.mailLabel}</a>
               </div>
             </div>
           </div>

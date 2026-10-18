@@ -14,9 +14,9 @@ export default function LeistungenPage() {
       <section className="section">
         <div className="container">
           <div data-reveal="" className="split split--end">
-            <SectionHeading title="Sechs Bereiche, ein Team" subtitle="Für Teilsamen, Gemeinde, Kanton und Private" />
+            <SectionHeading title="Fünf Bereiche, ein Team" subtitle="Für Teilsamen, Gemeinde, Kanton und Private" />
             <p style={{ margin: 0, maxWidth: '62ch' }}>
-              Wir arbeiten dort, wo es steil, nass oder eng wird: im Schutzwald, an Bächen und Hängen, an der Brünig-Passstrasse und in Ihrem Garten.
+              Wir arbeiten dort, wo es steil, nass oder eng wird: im Schutzwald, an Bächen und Hängen, an Strassen und in Ihrem Garten.
               Wählen Sie den Bereich, der zu Ihrem Anliegen passt.
             </p>
           </div>

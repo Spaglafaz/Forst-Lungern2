@@ -22,8 +22,8 @@ export default function HolzproduktePage() {
             <SectionHeading title="Unser Sortiment" subtitle="Anfragen statt bestellen – wir melden uns" />
             <div>
               <p style={{ margin: 0, maxWidth: '62ch' }}>
-                Kein Onlineshop: Wählen Sie ein Produkt und fragen Sie an – per Formular oder WhatsApp. Abholung im Forstwerkhof Hackern nach telefonischer
-                Vereinbarung.
+                Kein Onlineshop: Wählen Sie ein Produkt und fragen Sie an – per Formular oder WhatsApp. Abholung im Forstwerkhof oder Lieferung nach telefonischer
+                Absprache.
               </p>
               <p style={{ margin: '12px 0 0', fontSize: 15, color: 'var(--text-muted)' }}>{priceNote}</p>
             </div>
@@ -68,7 +68,7 @@ export default function HolzproduktePage() {
           style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,300px),1fr))', gap: 'clamp(40px,6vw,72px)' }}
         >
           <div data-reveal="">
-            <SectionHeading title="Abholung" subtitle="Forstwerkhof Hackern (Nussberg), Lungern" />
+            <SectionHeading title="Abholung" subtitle="Forstwerkhof Nussberg, Lungern" />
             <p style={{ margin: '22px 0 0', maxWidth: '62ch' }}>
               Keine festen Öffnungszeiten – Abholung nach telefonischer Vereinbarung. Rufen Sie kurz an, dann ist das Holz bereit, wenn Sie kommen.
             </p>
@@ -81,7 +81,7 @@ export default function HolzproduktePage() {
           <div data-reveal="">
             <SectionHeading title="Lieferung" subtitle="In der Gemeinde Lungern" />
             <p style={{ margin: '22px 0 0', maxWidth: '62ch' }}>
-              Wir liefern in der Gemeinde Lungern pauschal ab CHF 30.–. Lieferungen in die Region und Mindestmengen auf Anfrage.
+              Wir liefern in der Gemeinde Lungern pauschal ab CHF 20.–. Lieferungen in die Region und Mindestmengen auf Anfrage.
             </p>
           </div>
           <div data-reveal="">

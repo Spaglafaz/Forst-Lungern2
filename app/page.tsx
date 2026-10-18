@@ -19,7 +19,7 @@ export default function HomePage() {
         pos="center 42%"
         eyebrow="Forst Lungern AG · Lungern OW"
         title="Für einen sicheren und gesunden Wald in Lungern"
-        text="Holzerei, Schutzwaldpflege, Verbauungen, Steinschlagnetze und Winterdienst – aus einer Hand, vom Werkhof Hackern in Lungern."
+        text="Holzerei, Schutzwaldpflege, Verbauungen und Winterdienst – aus einer Hand, vom Forstwerkhof Nussberg in Lungern."
       >
         <Button size="lg" icon="phone" href="/#ansprechperson">
           Anrufen
@@ -44,7 +44,7 @@ export default function HomePage() {
             <SectionHeading title="Die neue Forst Lungern AG" subtitle="Seit 1. März 2026 gemeinsam unterwegs" />
             <p className="body-copy">
               Die Teilsamen Lungern-Dorf und Lungern-Obsee führen ihre Forstbetriebe seit dem 1. März 2026 gemeinsam als Forst Lungern AG. Für unsere
-              Kunden bleibt alles vertraut: das Team, der Werkhof Hackern und die Ansprechperson.
+              Kunden bleibt alles vertraut: das Team, der Forstwerkhof und die Ansprechperson.
             </p>
             <p className="body-copy">
               Wir pflegen den Schutzwald, holzen sicher entlang von Strassen und in Gärten, bauen Verbauungen und Waldstrassen und räumen im Winter
@@ -142,7 +142,7 @@ export default function HomePage() {
             <SectionHeading title="Holz aus dem Lungerer Wald" subtitle="Brennholz, Schnitzel und mehr – direkt vom Werkhof" />
             <p className="body-copy">
               Ofenfertiges Brennholz aus Buche und Nadelholz, Anfeuerholz, Hackschnitzel für Heizungen, Rindenmulch und Lärchenpfosten für den Zaun.
-              Abholung im Forstwerkhof Hackern nach telefonischer Vereinbarung oder Lieferung in der Gemeinde Lungern.
+              Abholung im Forstwerkhof oder Lieferung nach telefonischer Absprache.
             </p>
             <div className="btn-row" style={{ marginTop: 34 }}>
               <Button arrow href="/holzprodukte">
@@ -238,7 +238,7 @@ export default function HomePage() {
             Unsere Grundsätze
           </span>
           <span data-words="" style={{ font: '700 19px/1.3 var(--font-serif)', color: 'var(--text-strong)' }}>
-            Naturnaher Waldbau · Bewirtschaftung nach den Grundsätzen von FSC und NaiS · Anerkannter Lehrbetrieb
+            Naturnaher Waldbau · Bewirtschaftung nach den Grundsätzen von FSC · Anerkannter Lehrbetrieb
           </span>
         </div>
       </section>

@@ -61,8 +61,8 @@ export const SERVICES: Service[] = [
     meta: 'Teilsamen · Kanton',
     short: 'Schutzwaldpflege nach NaiS, Jungwaldpflege, Pflanzungen und Lebensraumaufwertung.',
     intro:
-      'Rund 61 % des Lungerer Waldes sind Schutzwald. Wir pflegen ihn nach den Grundsätzen von NaiS, damit er Siedlungen, Strassen und Bahn vor Steinschlag, Lawinen und Rutschungen schützt – und bewirtschaften den übrigen Wald naturnah.',
-    bullets: ['Waldbewirtschaftung', 'Schutzwaldpflege (NaiS)', 'Jungwaldpflege', 'Pflanzungen', 'Lebensraumaufwertung'],
+      'Rund 61 % des Lungerer Waldes sind Schutzwald. Wir pflegen ihn nach den Grundsätzen von NaiS, damit er Siedlungen, Strassen und Bahn vor Steinschlag, Lawinen und Rutschungen schützt.',
+    bullets: ['Waldbewirtschaftung', 'Schutzwaldpflege', 'Jungwaldpflege', 'Pflanzungen', 'Lebensraumaufwertung'],
     forWhom: ['Teilsamen', 'Kanton'],
     images: ['motorsaege-gegenlicht.jpg', 'wald-sonnenstrahlen.jpg', 'weiher-nachher.jpg'],
     heroPos: 'center 40%',
@@ -70,33 +70,20 @@ export const SERVICES: Service[] = [
   },
   {
     slug: 'naturgefahren-verbauungen',
-    title: 'Naturgefahren & Verbauungen',
+    title: 'Verbauungen',
     meta: 'Gemeinde · Kanton · Wuhrgenossenschaften',
-    short: 'Bach-, Hang- und Lawinenverbauungen, Unterhalt, Quell- und Wasserfassungen.',
+    short: 'Bach-, Hang- und Lawinenverbauungen sowie deren Unterhalt.',
     intro:
       'Bäche, Hänge und Lawinenzüge oberhalb von Lungern brauchen Verbauungen, die halten. Wir bauen und unterhalten sie mit eigenen Maschinen und mit Holz aus der Region.',
-    bullets: ['Bachverbauungen', 'Hangverbauungen', 'Lawinenverbauungen', 'Unterhalt bestehender Verbauungen', 'Quell- und Wasserfassungen'],
+    bullets: ['Bachverbauungen', 'Hangverbauungen', 'Lawinenverbauungen', 'Unterhalt bestehender Verbauungen'],
     forWhom: ['Gemeinde', 'Kanton', 'Wuhrgenossenschaften'],
     images: ['schreitbagger-verbau.jpg', 'wegbau-treppe-bagger.jpg', 'seilkran-bagger-rundholz.jpg'],
     heroPos: 'center 50%',
     anliegen: 'Verbauungen',
   },
   {
-    slug: 'steinschlagnetze',
-    title: 'Steinschlagnetze',
-    meta: 'Kanton · Bund · Netzhersteller',
-    short: 'Aufbau, Tests mit Partnerfirma, Ausmähen und Unterhalt an der Brünig-Passstrasse.',
-    intro:
-      'Steinschlagnetze sichern die Brünig-Passstrasse. Wir bauen sie auf, testen sie zusammen mit einer Partnerfirma und halten sie frei und intakt – im steilen Gelände, oft direkt über dem Verkehr.',
-    bullets: ['Aufbau von Steinschlagnetzen', 'Testen mit Partnerfirma', 'Ausmähen und Unterhalt an der Brünig-Passstrasse'],
-    forWhom: ['Kanton', 'Bund (ASTRA)', 'Netzhersteller'],
-    images: ['sicherheitsholzerei-strasse.jpg', 'seilbahn-tal.jpg', 'seilkran-winter.jpg'],
-    heroPos: 'center 50%',
-    anliegen: 'Verbauungen',
-  },
-  {
     slug: 'holzerei-baumpflege',
-    title: 'Holzerei & Baumpflege',
+    title: 'Sicherheitsholzerei & Baumpflege',
     meta: 'Private · Gemeinde · Werke',
     short: 'Sicherheitsholzerei, Gartenholzerei, Baumpflege, Böschungspflege und Entsorgung.',
     intro:
@@ -109,12 +96,12 @@ export const SERVICES: Service[] = [
   },
   {
     slug: 'strassen-infrastruktur',
-    title: 'Strassen & Infrastruktur',
+    title: 'Unterhalt Infrastruktur',
     meta: 'Teilsamen · Gemeinde',
     short: 'Wald-, Alp- und Erschliessungsstrassen sowie Schwemmholz am Lungerersee.',
     intro:
-      'Wald-, Alp- und Erschliessungsstrassen müssen Wetter und Last aushalten. Wir bauen und unterhalten sie mit Bagger und Schlepper und räumen Schwemmholz am Lungerersee.',
-    bullets: ['Wald-, Alp- und Erschliessungsstrassen', 'Unterhalt und Instandstellung', 'Schwemmholz Lungerersee'],
+      'Wald-, Alp- und Erschliessungsstrassen müssen Wetter und Last aushalten. Wir bauen und unterhalten sie und reinigen den Lungerersee.',
+    bullets: ['Wald-, Alp- und Erschliessungsstrassen', 'Unterhalt und Instandstellungen aller Art', 'Schwemmholz Lungerersee'],
     forWhom: ['Teilsamen', 'Gemeinde'],
     images: ['wegbau-treppe-bagger.jpg', 'wegunterhalt-team.jpg', 'waldstrasse-winter-polter.jpg'],
     heroPos: 'center 50%',
@@ -148,7 +135,7 @@ export const PRODUCTS: Product[] = [
   { id: 'rindenmulch', name: 'Rindenmulch', ausfuehrung: 'für Garten und Beete', einheit: 'Sm³', price: 'CHF 45.–' },
   { id: 'pfosten-15', name: 'Zaunpfosten Lärche', ausfuehrung: 'gespitzt, 1.5 m', einheit: 'Stück', price: 'CHF 9.–' },
   { id: 'pfosten-20', name: 'Zaunpfosten Lärche', ausfuehrung: 'gespitzt, 2.0 m', einheit: 'Stück', price: 'CHF 12.–' },
-  { id: 'lieferung', name: 'Lieferung', ausfuehrung: 'Gemeinde Lungern', einheit: 'pauschal', price: 'ab CHF 30.–' },
+  { id: 'lieferung', name: 'Lieferung', ausfuehrung: 'Gemeinde Lungern', einheit: 'pauschal', price: 'ab CHF 20.–' },
 ];
 
 export type Machine = { id: string; name: string; kind: string; use: string; image?: string; pos?: string; placeholder?: string };
@@ -159,13 +146,13 @@ export const MACHINES: Machine[] = [
   { id: 'liebherr', name: 'Bagger Liebherr 916', kind: 'Wegbau und Verbau', use: 'Für Waldstrassen, Treppen, Bach- und Hangverbauungen.', image: 'wegbau-treppe-bagger.jpg', pos: 'center' },
   { id: 'unitrac', name: 'Lindner Unitrac 82', kind: 'Transporter', use: 'Transport von Material und Personal, Winterdienst.', placeholder: 'Foto Lindner Unitrac 82' },
   { id: 'mbtrac', name: 'MB Trac', kind: 'Zugmaschine', use: 'Für Anhänger, Seilwinde und Winterdienst.', image: 'maschine-mbtrac.jpg', pos: 'center 30%' },
-  { id: 'kramer', name: 'Kramer', kind: 'Radlader', use: 'Holzumschlag und Arbeiten im Werkhof Hackern.', image: 'maschine-kramer.jpg', pos: 'center 15%' },
+  { id: 'kramer', name: 'Kramer', kind: 'Radlader', use: 'Holzumschlag und Arbeiten im Forstwerkhof.', image: 'maschine-kramer.jpg', pos: 'center 15%' },
 ];
 
 export const MILESTONES = [
-  { date: '1996', text: 'Gemeinsamer Bau des Werkhofs – Beginn der Zusammenarbeit der Teilsamen Lungern-Dorf und Lungern-Obsee.' },
-  { date: '2007', text: 'Erweiterung des Werkhofs.' },
-  { date: '1. Oktober 2025', text: 'Armin Imfeld übernimmt als Förster und Betriebsleiter.' },
+  { date: '1996', text: 'Bau des gemeinsamen Forstwerkhofes – Beginn der Zusammenarbeit der Teilsamen Lungern-Dorf und Lungern-Obsee.' },
+  { date: '2005', text: 'Neubau Brennholzhalle.' },
+  { date: '1. Oktober 2025', text: 'Armin Imfeld übernimmt als Revierförster und Betriebsleiter.' },
   { date: '28. Januar 2026', text: 'Ausserordentliche Einungsgemeinden beider Teilsamen stimmen der Gründung zu.' },
   { date: '23. Februar 2026', text: 'Eintrag im Handelsregister des Kantons Obwalden.' },
   { date: '1. März 2026', text: 'Offizieller Betriebsstart der Forst Lungern AG.' },
@@ -253,7 +240,7 @@ export type Hero = { image: string; pos: string; eyebrow: string; title: string;
 
 export const HEROES: Record<string, Hero> = {
   ueber: { image: PH + 'seilkran-tal-panorama.jpg', pos: 'center 52%', eyebrow: 'Über uns', title: 'Ein Betrieb für den Lungerer Wald', text: 'Die Forst Lungern AG führt die Forstbetriebe der Teilsamen Lungern-Dorf und Lungern-Obsee seit dem 1. März 2026 gemeinsam.' },
-  leistungen: { image: PH + 'seilbahn-tal.jpg', pos: 'center 45%', eyebrow: 'Leistungen', title: 'Was wir für Sie tun', text: 'Sechs Bereiche – vom Schutzwald über Verbauungen und Steinschlagnetze bis zum Winterdienst.' },
+  leistungen: { image: PH + 'seilbahn-tal.jpg', pos: 'center 45%', eyebrow: 'Leistungen', title: 'Was wir für Sie tun', text: 'Fünf Bereiche – vom Schutzwald über Verbauungen bis zum Winterdienst.' },
   produkte: { image: PH + 'rundholz-polter.jpg', pos: 'center 42%', eyebrow: 'Holzprodukte', title: 'Holz aus dem Lungerer Wald', text: 'Brennholz, Schnitzel, Rindenmulch und Lärchenpfosten – Schaufenster mit Anfrage, kein Onlineshop.' },
   maschinen: { image: PH + 'seilkran-bagger-rundholz.jpg', pos: 'center 72%', eyebrow: 'Maschinenpark', title: 'Für steiles Gelände gebaut', text: 'Seilkran, Forstschlepper, Bagger und Transporter – alle Maschinen sind auf die Forst Lungern AG übergegangen.' },
   jobs: { image: PH + 'holzerei-team-nebel.jpg', pos: 'center 50%', eyebrow: 'Jobs & Lehrstellen', title: 'Arbeiten, wo andere wandern', text: 'Offene Stellen, Lehre Forstwart/in EFZ und Schnupperlehre bei einem anerkannten Lehrbetrieb.' },

@@ -63,7 +63,7 @@ export default function KontaktPage() {
               </dd>
               <dt>Werkhof</dt>
               <dd>
-                Forstwerkhof Hackern (Nussberg)
+                Forstwerkhof Nussberg
                 <br />
                 Lungern
               </dd>
@@ -85,7 +85,7 @@ export default function KontaktPage() {
               className="card"
               style={{ display: 'block', marginTop: 14, position: 'relative', aspectRatio: '4/3', background: 'var(--sand-200)', overflow: 'hidden' }}
             >
-              <Image src={PH + 'karte-werkhof-hackern.png'} alt="Luftbild Forstwerkhof Hackern, Lungern" fill sizes="(max-width: 700px) 100vw, 400px" style={{ objectFit: 'cover' }} />
+              <Image src={PH + 'karte-werkhof-hackern.png'} alt="Luftbild Forstwerkhof Nussberg, Lungern" fill sizes="(max-width: 700px) 100vw, 400px" style={{ objectFit: 'cover' }} />
             </a>
             <div className="btn-row" style={{ gap: 10, marginTop: 14 }}>
               <Button size="sm" variant="outline" icon="map-pin" href={CONTACT.mapsGoogle}>
